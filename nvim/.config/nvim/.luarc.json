@@ -1,0 +1,10 @@
+{
+    "diagnostics.globals": [
+        "t"
+    ],
+    "diagnostics.disable": [
+        "unused-local",
+        "lowercase-global"
+    ],
+    "completion.autoRequire": false
+}
