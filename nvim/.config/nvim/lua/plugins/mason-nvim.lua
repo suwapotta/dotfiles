@@ -1,0 +1,22 @@
+return {
+  "mason-org/mason.nvim",
+  opts = {
+    ensure_installed = {
+      "arduino-language-server",
+      "bibtex-tidy",
+      "clang-format",
+      "clangd",
+      "codelldb",
+      "json-lsp",
+      "cssmodules-language-server",
+      "latexindent",
+      "lua-language-server",
+      "shfmt",
+      "stylua",
+      "svlangserver",
+      "texlab",
+      "verible",
+      "hyprls",
+    },
+  },
+}
