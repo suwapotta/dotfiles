@@ -17,6 +17,8 @@ return {
       "texlab",
       "verible",
       "hyprls",
+      "pyright",
+      "ruff",
     },
   },
 }
