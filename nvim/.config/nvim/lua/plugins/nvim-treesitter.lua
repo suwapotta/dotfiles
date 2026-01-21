@@ -18,6 +18,11 @@ return {
         "latex",
         "bibtex",
         "python",
+        "norg",
+        "scss",
+        "svelte",
+        "typst",
+        "vue",
       }
 
       if type(opts.highlight) == "table" and type(opts.highlight.disable) == "table" then
