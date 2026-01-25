@@ -2,6 +2,7 @@
 
 layout {
     gaps 10
+    background-color "transparent"
 
     // Options: never, always, on-overflow
     center-focused-column "never"
