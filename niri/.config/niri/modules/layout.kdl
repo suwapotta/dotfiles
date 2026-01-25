@@ -1,0 +1,116 @@
+// https://yalter.github.io/niri/Configuration:-Layout
+
+layout {
+    gaps 10
+
+    // Options: never, always, on-overflow
+    center-focused-column "never"
+    always-center-single-column
+    // empty-workspace-above-first
+    default-column-display "normal"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+
+        fixed 1920
+    }
+
+    // preset-window-heights {}
+
+    default-column-width { proportion 0.5; }
+
+    // By default focus ring and border are rendered as a solid background rectangle
+    // behind windows. That is, they will show up through semitransparent windows.
+    // This is because windows using client-side decorations can have an arbitrary shape.
+    //
+    // If you don't like that, you should uncomment `prefer-no-csd` below.
+    // Niri will draw focus ring and border *around* windows that agree to omit their
+    // client-side decorations.
+    //
+    // Alternatively, you can override it with a window rule called
+    // `draw-border-with-background`.
+
+    // You can change how the focus ring looks.
+    focus-ring {
+        off
+        width 3.5
+
+        // Colors can be set in a variety of ways:
+        // - CSS named colors: "red"
+        // - RGB hex: "#rgb", "#rgba", "#rrggbb", "#rrggbbaa"
+        // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
+
+        // active-color "#7fc8ff"
+        inactive-color "#505050"
+        urgent-color "#9b0000"
+
+        // You can also use gradients. They take precedence over solid colors.
+        // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
+        // The angle is the same as in linear-gradient, and is optional,
+        // defaulting to 180 (top-to-bottom gradient).
+        // You can use any CSS linear-gradient tool on the web to set these up.
+        // Changing the color space is also supported, check the wiki for more info.
+        //
+        active-gradient from="#80c8ff" to="#c7ff7f" angle=45
+
+        // You can also color the gradient relative to the entire view
+        // of the workspace, rather than relative to just the window itself.
+        // To do that, set relative-to="workspace-view".
+        //
+        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+    }
+
+    border {
+        on
+        width 3.2
+
+        urgent-color "#9b0000"
+        active-gradient from="#e5989b" to="#ffb4a2" angle=45 relative-to="workspace-view" in="oklch longer hue"
+        inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+    }
+
+    shadow {
+        on
+
+        // draw-behind-window true
+        softness 30
+        spread 5
+        offset x=0 y=5
+        color "#0007"
+    }
+
+    tab-indicator {
+        on
+
+        hide-when-single-tab
+        place-within-column
+        gap 5
+        width 3
+        length total-proportion=1.0
+        position "right"
+        gaps-between-tabs 5
+        corner-radius 1000
+        // active-color "red"
+        // inactive-color "gray"
+        // urgent-color "blue"
+        active-gradient from="#80c8ff" to="#bbddff" angle=45
+        inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+        urgent-gradient from="#800" to="#a33" angle=45
+
+    }
+
+    insert-hint {
+        on
+        color "#ffc87f80"
+        gradient from="#ffbb6680" to="#ffc88080" angle=45 relative-to="workspace-view"
+    }
+
+    struts {
+        // left 0
+        // right 0
+        top -35 
+        // bottom 0
+    }
+}

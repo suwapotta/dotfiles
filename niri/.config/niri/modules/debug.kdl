@@ -1,0 +1,7 @@
+// https://yalter.github.io/niri/Configuration:-Debug-Options
+
+// Noctalia shell
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}
