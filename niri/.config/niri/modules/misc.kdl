@@ -1,3 +1,17 @@
+// https://yalter.github.io/niri/Configuration:-Miscellaneous
+
+spawn-at-startup "qs" "-c" "noctalia-shell"
+// spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+// screenshot-path null
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+// prefer-no-csd
+
 cursor {
     xcursor-theme "Bibata-Modern-Classic"
     xcursor-size 24

@@ -33,8 +33,11 @@ window-rule {
 
 window-rule {
     match app-id="kitty"
+
+    default-column-width { proportion 0.75; }
     draw-border-with-background false
 }
+
 
 // Noctalia shell
 window-rule {

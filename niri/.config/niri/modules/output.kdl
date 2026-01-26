@@ -8,9 +8,9 @@ output "eDP-1" {
 
     hot-corners {
       // off
-      top-left
-      top-right
+      // top-left
+      // top-right
       // bottom-left
-      // bottom-right
+      bottom-right
     }
 }
