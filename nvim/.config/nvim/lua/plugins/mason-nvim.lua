@@ -16,7 +16,6 @@ return {
       "svlangserver",
       "texlab",
       "verible",
-      "hyprls",
       "pyright",
       "ruff",
     },

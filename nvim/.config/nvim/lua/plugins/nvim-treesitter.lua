@@ -8,7 +8,6 @@ return {
         "vim",
         "bash",
         "kitty",
-        "hyprlang",
         "json",
         "arduino",
         "c",
