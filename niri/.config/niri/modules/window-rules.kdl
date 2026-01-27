@@ -5,12 +5,6 @@ window-rule {
     default-column-width {}
 }
 
-// Open the Firefox picture-in-picture player as floating by default.
-window-rule {
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    open-floating true
-}
-
 window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
@@ -25,8 +19,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id="firefox"
-    match app-id="anki"
+    match app-id="zen"
 
     open-maximized true
 }
