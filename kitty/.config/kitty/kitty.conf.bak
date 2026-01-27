@@ -41,9 +41,3 @@ map ctrl+kp_0 change_font_size all 0
 # Transparent background
 dynamic_background_opacity yes
 background_opacity 0.89
-
-
-# BEGIN_KITTY_THEME
-# Noctalia
-include current-theme.conf
-# END_KITTY_THEME

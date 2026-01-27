@@ -8,7 +8,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open Terminal" { spawn "kitty"; }
-    Mod+B hotkey-overlay-title="Open Firefox" { spawn "firefox"; }
+    Mod+B hotkey-overlay-title="Open Zen Browser" { spawn "zen"; }
 
     // "-l 1.0" limits the volume to 100%.
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }

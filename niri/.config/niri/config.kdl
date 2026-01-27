@@ -19,3 +19,6 @@ include "modules/misc.kdl"
 include "modules/window-rules.kdl"
 include "modules/animations.kdl"
 include "modules/debug.kdl"
+
+include "./noctalia.kdl"
+
