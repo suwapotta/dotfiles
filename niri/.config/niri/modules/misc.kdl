@@ -2,14 +2,16 @@
 
 spawn-at-startup "qs" "-c" "noctalia-shell"
 
+// prefer-no-csd
+
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // screenshot-path null
 
-hotkey-overlay {
-    skip-at-startup
+environment {
+    QT_QPA_PLATFORMTHEME "qt6ct"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    QT_QPA_PLATFORM "wayland;xcb"
 }
-
-// prefer-no-csd
 
 cursor {
     xcursor-theme "Bibata-Modern-Classic"
@@ -17,4 +19,13 @@ cursor {
 
     hide-when-typing
     hide-after-inactive-ms 5000
+}
+
+overview {
+    zoom 0.5
+}
+
+
+hotkey-overlay {
+    skip-at-startup
 }

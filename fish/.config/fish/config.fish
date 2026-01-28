@@ -74,7 +74,6 @@ if status is-interactive # Commands to run in interactive sessions can go here
     alias clear "printf '\033[2J\033[3J\033[1;1H'"
     alias qs 'qs -c ii'
     alias rg grep
-    alias clock peaclock
 
     # fzf.fish plugin
     fzf_configure_bindings --history= --directory=\ct --variables=\e\cv
@@ -86,4 +85,4 @@ end
 
 export MANPAGER='nvim +Man!'
 
-# fastfetch
+export LIBVA_DRIVER_NAME=iHD

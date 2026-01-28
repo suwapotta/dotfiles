@@ -1,0 +1,7 @@
+// https://yalter.github.io/niri/Configuration:-Layer-Rules
+
+// Noctalia shell: Blurred Overview Wallpaper
+layer-rule {
+    match namespace="^noctalia-overview*"
+    place-within-backdrop true
+}

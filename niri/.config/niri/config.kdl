@@ -17,6 +17,7 @@ include "modules/binds.kdl"
 include "modules/layout.kdl"
 include "modules/misc.kdl"
 include "modules/window-rules.kdl"
+include "modules/layer-rules.kdl"
 include "modules/animations.kdl"
 include "modules/debug.kdl"
 

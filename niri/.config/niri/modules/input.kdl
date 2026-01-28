@@ -61,3 +61,6 @@ input {
     focus-follows-mouse max-scroll-amount="0%"
     workspace-auto-back-and-forth
 }
+
+// fcitx5 (JP/VN)
+spawn-at-startup "fcitx5"

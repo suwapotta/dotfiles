@@ -157,9 +157,10 @@ binds {
     Mod+V hotkey-overlay-title="Clipboard History" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
     Mod+Delete hotkey-overlay-title="Session Menu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
     Mod+Shift+Delete hotkey-overlay-title="Lock & Suspend" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu lockAndSuspend"; }
-    Mod+Shift+T hotkey-overlay-title="Lock & Suspend" { spawn-sh "qs -c noctalia-shell ipc call systemMonitor toggle"; }
+    Mod+Shift+T hotkey-overlay-title="System Monitor" { spawn-sh "qs -c noctalia-shell ipc call systemMonitor toggle"; }
     Mod+Shift+P hotkey-overlay-title="Play/Pause media" { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
     Mod+Shift+N hotkey-overlay-title="Next media" { spawn-sh "qs -c noctalia-shell ipc call media next"; }
     Mod+Shift+B hotkey-overlay-title="Previous media" { spawn-sh "qs -c noctalia-shell ipc call media previous"; }
-    Ctrl+Shift+T hotkey-overlay-title="Set Wallpaper" { spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle"; }
+    Mod+Shift+Alt+T hotkey-overlay-title="Set Wallpaper" { spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle"; }
+    Mod+N hotkey-overlay-title="Toggle note panel" { spawn-sh "qs -c noctalia-shell ipc call plugin:todo togglePanel"; }
 }
