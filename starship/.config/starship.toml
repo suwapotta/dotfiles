@@ -16,13 +16,13 @@ $character
 # $character"""
 
 # Replace the "❯" symbol in the prompt with "➜"
-[character]                            # The name of the module we are configuring is "character"
+[character] # The name of the module we are configuring is "character"
 success_symbol = "[   ](bold fg:blue)"
 error_symbol = "[   ](bold fg:red)"
-vicmd_symbol = "[   ](bold fg:blue)"
+vimcmd_symbol = "[   ](bold fg:blue)"
 vimcmd_visual_symbol = "[   ](bold fg:blue)"
 vimcmd_replace_one_symbol = "[  󰛔 ](bold fg:blue)"
-vimcmd_replace_symbol = "[  󰬲 ](bold fg:blue)" 
+vimcmd_replace_symbol = "[  󰬲 ](bold fg:blue)"
 
 # Disable the package module, hiding it from the prompt completely
 [package]
@@ -57,7 +57,7 @@ deleted = " 🗑 "
 
 [hostname]
 ssh_only = false
-format =  "[󰣇 • $hostname](bg:purple bold fg:black)[](bold fg:purple)"
+format = "[󰣇 • $hostname](bg:purple bold fg:black)[](bold fg:purple)"
 trim_at = ".companyname.com"
 disabled = false
 

@@ -72,7 +72,6 @@ if status is-interactive # Commands to run in interactive sessions can go here
     alias pamcan pacman
     alias ls 'eza --icons'
     alias clear "printf '\033[2J\033[3J\033[1;1H'"
-    alias qs 'qs -c ii'
     alias rg grep
 
     # fzf.fish plugin
@@ -84,5 +83,5 @@ if status is-interactive # Commands to run in interactive sessions can go here
 end
 
 export MANPAGER='nvim +Man!'
-
 export LIBVA_DRIVER_NAME=iHD
+export EZA_COLORS="*.sv=35;1"
