@@ -2,13 +2,14 @@
 
 spawn-at-startup "qs" "-c" "noctalia-shell"
 
-// prefer-no-csd
+// Remove border for gtk applications
+prefer-no-csd
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // screenshot-path null
 
 environment {
-    QT_QPA_PLATFORMTHEME "gtk3"
+    QT_QPA_PLATFORMTHEME "qt6ct"
     QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
     QT_QPA_PLATFORM "wayland;xcb"
 }
