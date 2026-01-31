@@ -1,6 +1,7 @@
 // https://yalter.github.io/niri/Configuration:-Miscellaneous
 
-spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-sh-at-startup "qs -c noctalia-shell"
+spawn-sh-at-startup "~/.scripts/snapper-notify.sh"
 
 // Remove border for gtk applications
 prefer-no-csd

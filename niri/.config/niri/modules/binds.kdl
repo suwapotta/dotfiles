@@ -118,7 +118,6 @@ binds {
     Mod+Ctrl+D { reset-window-height; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
-
     Mod+Ctrl+F { expand-column-to-available-width; }
 
     Mod+C { center-column; }
@@ -142,7 +141,8 @@ binds {
     Ctrl+Insert { screenshot-screen; }
     Alt+Print { screenshot-window; }
 
-    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    // Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    Mod+Shift+Delete hotkey-overlay-title="Exit niri session" { quit; }
 
     // Noctalia shell
     Alt+Space hotkey-overlay-title="Application Launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
@@ -151,7 +151,6 @@ binds {
     Mod+V hotkey-overlay-title="Clipboard History" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
     Mod+Alt+C hotkey-overlay-title="Calender" { spawn-sh "qs -c noctalia-shell ipc call calendar toggle"; }
     Mod+Delete hotkey-overlay-title="Session Menu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
-    Mod+Shift+Delete hotkey-overlay-title="Lock & Suspend" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu lockAndSuspend"; }
     Mod+Shift+T hotkey-overlay-title="System Monitor" { spawn-sh "qs -c noctalia-shell ipc call systemMonitor toggle"; }
     Mod+Shift+P hotkey-overlay-title="Play/Pause media" { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
     Mod+Shift+N hotkey-overlay-title="Next media" { spawn-sh "qs -c noctalia-shell ipc call media next"; }
