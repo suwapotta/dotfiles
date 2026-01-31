@@ -6,19 +6,13 @@ binds {
 
     Mod+Slash { show-hotkey-overlay; }
 
-    // Suggested binds for running programs: terminal, app launcher, screen locker.
+    // niri
+    // Applications
     Mod+Return hotkey-overlay-title="Open Terminal" { spawn "kitty"; }
     Mod+B hotkey-overlay-title="Open Zen Browser" { spawn "zen"; }
+    Mod+Z hotkey-overlay-title="Open Anki" { spawn "anki"; }
 
-    // "-l 1.0" limits the volume to 100%.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+5%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
-
+    // Navigations
     Mod+O repeat=false { toggle-overview; }
     Mod+Q repeat=false { close-window; }
 
@@ -128,20 +122,11 @@ binds {
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
 
-    // Move the focused window between the floating and the tiling layout.
     Mod+A       { toggle-window-floating; }
     Mod+Shift+A { switch-focus-between-floating-and-tiling; }
 
     Mod+W { toggle-column-tabbed-display; }
 
-    // Mod+Space       { switch-layout "next"; }
-    // Mod+Shift+Space { switch-layout "prev"; }
-
-    Mod+Shift+S { screenshot; }
-    Ctrl+Insert { screenshot-screen; }
-    Alt+Print { screenshot-window; }
-
-    // Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
     Mod+Shift+Delete hotkey-overlay-title="Exit niri session" { quit; }
 
     // Noctalia shell
@@ -152,10 +137,19 @@ binds {
     Mod+Alt+C hotkey-overlay-title="Calender" { spawn-sh "qs -c noctalia-shell ipc call calendar toggle"; }
     Mod+Delete hotkey-overlay-title="Session Menu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
     Mod+Shift+T hotkey-overlay-title="System Monitor" { spawn-sh "qs -c noctalia-shell ipc call systemMonitor toggle"; }
-    Mod+Shift+P hotkey-overlay-title="Play/Pause media" { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
-    Mod+Shift+N hotkey-overlay-title="Next media" { spawn-sh "qs -c noctalia-shell ipc call media next"; }
-    Mod+Shift+B hotkey-overlay-title="Previous media" { spawn-sh "qs -c noctalia-shell ipc call media previous"; }
+    Mod+Shift+P allow-when-locked=true hotkey-overlay-title="Play/Pause media" { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
+    Mod+Shift+N allow-when-locked=true hotkey-overlay-title="Next media" { spawn-sh "qs -c noctalia-shell ipc call media next"; }
+    Mod+Shift+B allow-when-locked=true hotkey-overlay-title="Previous media" { spawn-sh "qs -c noctalia-shell ipc call media previous"; }
     Mod+Shift+Alt+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle"; }
     Mod+N hotkey-overlay-title="Toggle Note Panel" { spawn-sh "qs -c noctalia-shell ipc call plugin:todo togglePanel"; }
+    // TODO: Add keybindings for notification panel and dismiss notification
+    // Mod+N hotkey-overlay-title="Toggle Note Panel" { spawn-sh "qs -c noctalia-shell ipc call plugin:todo togglePanel"; }
+    // Mod+N hotkey-overlay-title="Toggle Note Panel" { spawn-sh "qs -c noctalia-shell ipc call plugin:todo togglePanel"; }
     Mod+Alt+Up hotkey-overlay-title="Toggle Bar Visibilty" { spawn-sh "qs -c noctalia-shell ipc call bar toggle"; }
+    XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
+    XF86AudioLowerVolume  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease"; }
+    XF86AudioMute         allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteOutput"; }
+    XF86AudioMicMute      allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteInput"; }
+    XF86MonBrightnessUp   allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness increase"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness decrease"; }
 }
