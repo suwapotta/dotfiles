@@ -156,7 +156,7 @@ binds {
     Mod+Shift+P hotkey-overlay-title="Play/Pause media" { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
     Mod+Shift+N hotkey-overlay-title="Next media" { spawn-sh "qs -c noctalia-shell ipc call media next"; }
     Mod+Shift+B hotkey-overlay-title="Previous media" { spawn-sh "qs -c noctalia-shell ipc call media previous"; }
-    Mod+Shift+Alt+T hotkey-overlay-title="Set Wallpaper" { spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle"; }
+    Mod+Shift+Alt+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle"; }
     Mod+N hotkey-overlay-title="Toggle Note Panel" { spawn-sh "qs -c noctalia-shell ipc call plugin:todo togglePanel"; }
     Mod+Alt+Up hotkey-overlay-title="Toggle Bar Visibilty" { spawn-sh "qs -c noctalia-shell ipc call bar toggle"; }
 }
