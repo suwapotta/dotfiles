@@ -12,6 +12,8 @@ binds {
     Mod+B hotkey-overlay-title="Open Zen Browser" { spawn "zen"; }
     Mod+Z hotkey-overlay-title="Open Anki" { spawn "anki"; }
     Mod+E hotkey-overlay-title="Open files" { spawn "nautilus"; }
+    Mod+Shift+E hotkey-overlay-title="Open yazi" { spawn-sh "kitty yazi"; }
+    Control+Shift+Escape hotkey-overlay-title="Open btop++" { spawn-sh "kitty btop"; }
 
     // Navigations
     Mod+O repeat=false { toggle-overview; }

@@ -18,8 +18,8 @@ return {
       "verible",
       "pyright",
       "ruff",
-      "kdlfmt",
       "prettier",
+      -- "kdlfmt",
     },
   },
 }
