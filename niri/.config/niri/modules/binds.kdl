@@ -14,6 +14,7 @@ binds {
     Mod+E hotkey-overlay-title="Open files" { spawn "nautilus"; }
     Mod+Shift+E hotkey-overlay-title="Open yazi" { spawn-sh "kitty yazi"; }
     Control+Shift+Escape hotkey-overlay-title="Open btop++" { spawn-sh "kitty btop"; }
+    Control+Shift+Alt+Escape hotkey-overlay-title="Open btrfs assistant" { spawn-sh "kitty sudo -E btrfs-assistant-bin"; }
 
     // Navigations
     Mod+O repeat=false { toggle-overview; }
@@ -141,15 +142,14 @@ binds {
     Mod+V hotkey-overlay-title="Clipboard History" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
     Mod+Alt+C hotkey-overlay-title="Calender" { spawn-sh "qs -c noctalia-shell ipc call calendar toggle"; }
     Mod+Delete hotkey-overlay-title="Session Menu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
-    Mod+Shift+T hotkey-overlay-title="System Monitor" { spawn-sh "qs -c noctalia-shell ipc call systemMonitor toggle"; }
+    Mod+Alt+Down hotkey-overlay-title="System Monitor" { spawn-sh "qs -c noctalia-shell ipc call systemMonitor toggle"; }
     Mod+Shift+P allow-when-locked=true hotkey-overlay-title="Play/Pause media" { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
     Mod+Shift+N allow-when-locked=true hotkey-overlay-title="Next media" { spawn-sh "qs -c noctalia-shell ipc call media next"; }
     Mod+Shift+B allow-when-locked=true hotkey-overlay-title="Previous media" { spawn-sh "qs -c noctalia-shell ipc call media previous"; }
     Mod+Shift+Alt+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle"; }
-    Mod+N hotkey-overlay-title="Toggle Note Panel" { spawn-sh "qs -c noctalia-shell ipc call plugin:todo togglePanel"; }
-    // TODO: Add keybindings for notification panel and dismiss notification
-    // Mod+N hotkey-overlay-title="Toggle Note Panel" { spawn-sh "qs -c noctalia-shell ipc call plugin:todo togglePanel"; }
-    // Mod+N hotkey-overlay-title="Toggle Note Panel" { spawn-sh "qs -c noctalia-shell ipc call plugin:todo togglePanel"; }
+    Mod+N hotkey-overlay-title="Note Panel" { spawn-sh "qs -c noctalia-shell ipc call plugin:todo togglePanel"; }
+    Mod+T hotkey-overlay-title="notifications Panel" { spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory"; }
+    Mod+Shift+T hotkey-overlay-title="Clear oldest notifications" { spawn-sh "qs -c noctalia-shell ipc call notifications removeOldestHistory"; }
     Mod+Alt+Up hotkey-overlay-title="Toggle Bar Visibilty" { spawn-sh "qs -c noctalia-shell ipc call bar toggle"; }
     XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
     XF86AudioLowerVolume  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease"; }

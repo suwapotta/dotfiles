@@ -15,7 +15,7 @@ layout {
         proportion 0.5
         proportion 0.6667
 
-        fixed 1920
+        proportion 1.0
     }
 
     // preset-window-heights {}
