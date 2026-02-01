@@ -84,4 +84,4 @@ end
 
 export MANPAGER='nvim +Man!'
 export LIBVA_DRIVER_NAME=iHD
-export EZA_COLORS="*.txt=35:*.md=35:*.sv=33"
+export EZA_COLORS="*.txt=35:*.md=35:*.kdl=33:*.sv=33"

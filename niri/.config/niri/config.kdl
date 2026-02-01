@@ -2,7 +2,6 @@
 // "/-" comments out the following node.
 // Check the wiki for a full description of the configuration:
 // https://yalter.github.io/niri/Configuration:-Introduction
-
 /*
 *            _     _
 *     ___  (_)___(_)
@@ -10,7 +9,6 @@
 *   /_//_/_/_/ /_/
 *
 */
-
 include "modules/input.kdl"
 include "modules/output.kdl"
 include "modules/binds.kdl"
@@ -20,6 +18,5 @@ include "modules/window-rules.kdl"
 include "modules/layer-rules.kdl"
 include "modules/animations.kdl"
 include "modules/debug.kdl"
-
 include "./noctalia.kdl"
 
