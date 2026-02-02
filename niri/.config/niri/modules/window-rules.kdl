@@ -1,19 +1,11 @@
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 
 window-rule {
-    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    // match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    // match app-id=r#"^org\.gnome\.World\.Secrets$"#
 
     block-out-from "screen-capture"
     // block-out-from "screencast"
-}
-
-window-rule {
-    match app-id="anki"
-    opacity 0.89
-
-    draw-border-with-background false
-    clip-to-geometry true
 }
 
 window-rule {
@@ -30,6 +22,13 @@ window-rule {
     draw-border-with-background false
 }
 
+window-rule {
+  match app-id="anki"
+  opacity 0.89
+
+  draw-border-with-background false
+  clip-to-geometry true
+}
 
 // Noctalia shell
 window-rule {

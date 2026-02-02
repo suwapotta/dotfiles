@@ -133,7 +133,11 @@ binds {
 
     Mod+Shift+Delete hotkey-overlay-title="Exit niri session" { quit; }
 
-    Mod+Shift+S hotkey-overlay-title="Snipping Tool" { screenshot; }
+    Mod+Shift+S hotkey-overlay-title="Snipping Tool" { screenshot show-pointer=false; }
+
+    Mod+P hotkey-overlay-title="Toggle transparency" { toggle-window-rule-opacity; }
+
+    Mod+Insert hotkey-overlay-title="Toggle inhibit shortcuts" { toggle-keyboard-shortcuts-inhibit; }
 
     // Noctalia shell
     Alt+Space hotkey-overlay-title="Application Launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }

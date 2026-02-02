@@ -8,17 +8,17 @@
   "current_page_id": 0,
   "todos": [
     {
+      "id": 1769987276962,
+      "text": "[noctalia] Enable bluetooth",
+      "completed": false,
+      "createdAt": "2026-02-01T23:07:56.962Z",
+      "pageId": 0
+    },
+    {
       "id": 1769873731422,
       "text": "[tmux] Remake its dotfile",
       "completed": false,
       "createdAt": "2026-01-31T15:35:31.422Z",
-      "pageId": 0
-    },
-    {
-      "id": 1769906918095,
-      "text": "[eza] Add icon for kdl files",
-      "completed": false,
-      "createdAt": "2026-02-01T00:48:38.095Z",
       "pageId": 0
     },
     {
