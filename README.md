@@ -3,7 +3,7 @@
 <!--toc:start-->
 
 - [Arch Install Setup](#arch-install-setup)
-  - [Note](#note)
+  - [Notes](#notes)
   - [References](#references)
   - [Pre-installation](#pre-installation)
     - [Get an installation image](#get-an-installation-image)
@@ -17,17 +17,28 @@
     - [Disk partitioning](#disk-partitioning)
     - [Disk formatting](#disk-formatting)
     - [Disk mounting](#disk-mounting)
-  - [Main installation](#main-installation) - [Select mirrors](#select-mirrors)
+  - [Main installation](#main-installation)
+    - [Select mirrors](#select-mirrors)
+    - [Package Installation](#package-installation)
+    - [Fstab](#fstab)
+    - [Chroot](#chroot)
+    - [Timezone](#timezone)
+    - [Localization](#localization)
+    - [Hostname](#hostname)
+    - [Users](#users)
+    - [Grub](#grub)
+    - [Reboot](#reboot)
+  - [TODO](#todo)
   <!--toc:end-->
 
-## Note
+## Notes
 
 This guide is meant to test within a virtual machine first, so it may not
 match the real installation environment. The **main focus** of this guide
 is to have an Arch setup that uses _snapper_ as an alternative to _timeshift_,
-and to also quickly new machine as quick as possible.
+and also to quickly setup new machine as quick as possible.
 
-For virtual machine, enable **UEFI** and **3D acceleration** .
+For virtual machine, enable **UEFI** and **3D acceleration**.
 
 ## References
 
@@ -48,6 +59,7 @@ should be updated at the beginning of a month.
 From an existing Arch Linux installation, run:
 
 ```zsh
+# path_to_iso_directory
 pacman-key -v archlinux-version-x86_64.iso.sig
 ```
 
@@ -108,7 +120,7 @@ staion wlan0 connect ...
 Finally, check for connection:
 
 ```zsh
-ping -c 5 ping.archlinux.org
+ping -c 3 ping.archlinux.org
 ```
 
 ### Update system clock
@@ -140,7 +152,7 @@ fdisk -l
 # Start partitioning by
 cfdisk /dev/nvme0n1 # TUI
 # or
-fdisk /dev/nvme0n1 # Plain text
+fdisk /dev/nvme0n1 # Terminal
 ```
 
 ### Disk formatting
@@ -161,7 +173,7 @@ mkfs.btrfs /dev/nvme0n1p3
 ### Disk mounting
 
 ```zsh
-# Grant access
+# Preparing
 mount /dev/nvme0n1p3 /mnt
 
 # Create subvolumes
@@ -189,6 +201,9 @@ swapon /dev/nvme0n1p2
 
 ### Select mirrors
 
+This file will later be copied to the new system by `pacstrap`,
+so it is worth getting right.
+
 ```zsh
 # Install package
 pacman -S reflector
@@ -199,3 +214,172 @@ reflector --latest 200 --verbose --sort rate --save /etc/pacman.d/mirrorlist
 ## Resync servers
 pacman -Syyy
 ```
+
+### Package Installation
+
+```zsh
+# "base linux linux-firmware" REQUIRED
+# "man sudo" essentials
+# "sof-firmware" onboard audio (e.g., IEM)
+# "openssh" allow ssh and manage keys
+# "base-devel" 'makepkg -si'
+# "git" git stuffs
+# "bluez bluez-utils" bluetooth
+# "intel-ucode" microcode updates for gpu
+# "networkmanager" manage internet connection for both wire and wireless
+# "reflector" manages mirrorlist
+# "btrfs-progs" file system management
+# "efibootmgr" require for grub
+# "grub" bootloader
+# "grub-btrfs" btrfs support and snapshot boot menu
+# "inotify-tools" watch for changes (snapshot)
+# "pipewire pipewire-alsa pipewire-pulse pipewire-jack" audio framework
+# "wireplumber" pipewire session manager
+# "vim neovim" text editor
+
+pacstrap -K /mnt 'packages'
+```
+
+### Fstab
+
+```zsh
+# Fetch the disk mounting points as they are now and generate instructions
+# to let the system know how to mount the various disks automatically
+genfstab -U /mnt >> /mnt/etc/fstab
+
+# Check if fstab is fine
+cat /mnt/etc/fstab
+```
+
+### Chroot
+
+```zsh
+# To access to our new system, we chroot into it
+arch-chroot /mnt
+```
+
+### Timezone
+
+```bash
+# Add a symlink to local time
+ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
+
+# Now sync the system time to hardware clock
+hwclock --systohc
+
+# Check time
+date
+```
+
+### Localization
+
+To use the correct region and language specific formatting
+(like dates, currency, decimal separators), uncomment locales you will be using.
+
+```bash
+# I will uncomment the following:
+# en_US.UTF-8 UTF-8
+# vi_VN UTF-8
+# ja_JP.UTF-8 UTF-8
+nvim /etc/locale.gen
+
+# Generate locales by running:
+locale-gen
+```
+
+Set the locale to the desired one:
+
+```bash
+touch /etc/locale.conf
+vim /etc/locale.conf
+# Add: LANG=en_US.UTF-8
+```
+
+If you set the console keyboard layout, make the changes persistent in `/etc/vconsole.conf`:
+
+```txt
+KEYMAP=en
+```
+
+Check the output:
+
+```bash
+localectl status
+# System Locale: LANG=en_US.UTF-8
+#     VC Keymap: en
+```
+
+### Hostname
+
+```bash
+# Create /etc/hostname then choose and write the name of pc (Arch in my case)
+touch /etc/hostname
+nvim /etc/hostname
+
+# Create the /etc/hosts file. This is very important because it will resolve the
+# listed hostnames locally and not over Internet DNS.
+touch /etc/hosts
+nvim /etc/hoss
+
+# Change the content to match:
+# 127.0.0.1 localhost
+# ::1 localhost
+# 127.0.1.1 Arch
+```
+
+### Users
+
+```bash
+# Setup root password
+passwd
+
+# Add user
+# -m creates the home directory automatically
+# -G adds the user to the administration group wheel
+useradd -mG wheel <username>
+passwd <username>
+
+# Uncomment line below this line to allow user to have "superuser" permission
+# > Uncomment to let members of group wheel execute any action"
+EDITOR=nvim visudo
+```
+
+### Grub
+
+Install grub and its configuration into system:
+
+```bash
+grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+### Reboot
+
+```bash
+# For internet connection
+systemctl enable NetworkManager
+
+# Exit from chroot
+exit
+
+# Safety measure
+umount -R /mnt
+
+# Reboot and unplug the installation media
+reboot
+```
+
+Basically, Arch is now ready for use. If so, congrats!
+
+## TODO
+
+- **snapper**: snapper + snap-pac + snaperGUI?
+- **reflector** configuration
+- **systemd**: enable bluetooth.service + reflector.timer
+- **paru**
+- **install.sh**: for dotfiles:
+  - Additional packages: "rg zoxide fzf fd yazi tmux lazygit sddm niri"
+  - AUR: "zen-browser-bin noctalia-shell"
+- **NVIDIA drivers** :(
+- **lazygit** setup
+- **QEMU** VMs
