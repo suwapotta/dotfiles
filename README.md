@@ -315,7 +315,7 @@ If you set the console keyboard layout, make the changes persistent in `/etc/vco
 KEYMAP=en
 ```
 
-Check the output:
+Check the output (after reboot only):
 
 ```bash
 localectl status
@@ -385,6 +385,17 @@ reboot
 
 ## Post-installation
 
+### Network Manager
+
+[NetworkManager](https://wiki.archlinux.org/title/NetworkManager)
+ships a text user interface
+(TUI) for managing connections, the system host name
+and radio switches. But there also is `nmcli` if feeling spicy.
+
+```bash
+nmtui
+```
+
 ### AUR Helper
 
 My personal choice is `paru`:
@@ -426,8 +437,6 @@ chmod a+rx /.snapshots
 systemctl enable --now snapper-timeline.timer snapper-cleanup.timer grub-btrfsd.service
 ```
 
-<!-- TODO: Install AUR snapper-rollback -->
-
 Basically, Arch is now ready for use. If so, congrats!
 
 ## Tips and Tricks
@@ -450,8 +459,8 @@ reboot
 
 ## TODO
 
-- **networkmanager** for the first time after reboot
 - **fcitx5** and Catpuccin theme
+- **MControlCenter**
 - **reflector** configuration
 - **systemd**: enable bluetooth.service + reflector.timer
 - **paru**
