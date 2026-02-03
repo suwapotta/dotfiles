@@ -29,9 +29,10 @@
     - [Grub](#grub)
     - [Reboot](#reboot)
   - [Post-installation](#post-installation)
+    - [AUR Helper](#aur-helper)
     - [Snapper](#snapper)
   - [Tips and Tricks](#tips-and-tricks)
-    - [Placeholder text](#placeholder-text)
+    - [Snapper Recovery](#snapper-recovery)
   - [TODO](#todo)
   <!--toc:end-->
 
@@ -148,10 +149,10 @@ Layout after this step should look:
 | 3         | Linux Filesystem | Remaining space |
 
 ```zsh
-# Check the disk name by using either
-lsblk
-# or
+# Check the disk directories/properties by using either
 fdisk -l
+# or
+lsblk
 
 # Start partitioning by
 cfdisk /dev/nvme0n1 # TUI
@@ -175,6 +176,15 @@ mkfs.btrfs /dev/nvme0n1p3
 ```
 
 ### Disk mounting
+
+> [!IMPORTANT]
+>
+> | Subvolume  | Mountpoint  |
+> | ---------- | ----------- |
+> | @          | /           |
+> | @home      | /home       |
+> | @var_log   | /var/log    |
+> | @snapshots | /.snapshots |
 
 ```zsh
 # Preparing
