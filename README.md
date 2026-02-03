@@ -30,6 +30,8 @@
     - [Reboot](#reboot)
   - [Post-installation](#post-installation)
     - [Snapper](#snapper)
+  - [Tips and Tricks](#tips-and-tricks)
+    - [Placeholder text](#placeholder-text)
   - [TODO](#todo)
   <!--toc:end-->
 
@@ -181,19 +183,19 @@ mount /dev/nvme0n1p3 /mnt
 # Create subvolumes
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
-btrfs subvolume create /mnt/@var
+btrfs subvolume create /mnt/@var_log
 btrfs subvolume create /mnt/@snapshots
 
 # Unmount the root fs
 umount /mnt
+mount -o compress=zstd,subvol=@ /dev/nvme0n1p3 /mnt
 
 # Apply Zstd compression + EFI
-mkdir -p /mnt/{home,var,.snapshots,efi}
-mount -o compress=zstd,subvol=@ /dev/nvme0n1p3 /mnt
+mkdir -p /mnt/{home,var/log,.snapshots,efi}
 mount -o compress=zstd,subvol=@home /dev/nvme0n1p3 /mnt/home
-mount -o compress=zstd,subvol=@var /dev/nvme0n1p3 /mnt/var
+mount -o compress=zstd,subvol=@var_log /dev/nvme0n1p3 /mnt/var/log
 mount -o compress=zstd,subvol=@snapshots /dev/nvme0n1p3 /mnt/.snapshots
-mount /dev/nvme0n1 /mnt/efi
+mount /dev/nvme0n1p1 /mnt/efi
 
 # Enable SWAP
 swapon /dev/nvme0n1p2
@@ -373,6 +375,20 @@ reboot
 
 ## Post-installation
 
+### AUR Helper
+
+My personal choice is `paru`:
+
+```bash
+sudo pacman -S --needed base-devel
+
+mkdir -p ~/Downloads/Repositories/
+cd ~/Downloads/Repositories/
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+```
+
 ### Snapper
 
 ```bash
@@ -384,7 +400,7 @@ pacman -S snapper snap-pac
 
 # Avoid conflicting with previous sub-volume for next step
 umount /.snapshots
-rm -rf ./.snapshots
+rm -rf /.snapshots
 
 # Start creating snapper configuration
 snapper -c root create-config /
@@ -397,19 +413,40 @@ nvim /etc/snapper/configs/root
 chmod a+rx /.snapshots
 
 # Enable startup these services
-systemctl enable --now snapper-timeline.timer snapper-cleanup.timer grub-btrfs.service
+systemctl enable --now snapper-timeline.timer snapper-cleanup.timer grub-btrfsd.service
 ```
 
+<!-- TODO: Install AUR snapper-rollback -->
+
 Basically, Arch is now ready for use. If so, congrats!
+
+## Tips and Tricks
+
+### Snapper Recovery
+
+This allows us to restore a snapper snapshot even if the system is bricked.
+Start with booting into an **Arch live environment**, and execute the following:
+
+```bash
+mount /dev/nvme0n1p3 /mnt
+vim /mnt/@snapshots/*/info.xml
+# ":bn" and ":bp" to navigate between buffers
+
+rm -rf /mnt/@
+# Replace 1 with desired snapshot
+btrfs subvolume snapshot /mnt/@snapshots/1/snapshot /mnt/@
+reboot
+```
 
 ## TODO
 
 - **networkmanager** for the first time after reboot
+- **fcitx5** and Catpuccin theme
 - **reflector** configuration
 - **systemd**: enable bluetooth.service + reflector.timer
 - **paru**
 - **install.sh**: for dotfiles:
-  - Additional packages: "rg zoxide fzf fd yazi tmux lazygit sddm niri"
+  - Additional packages: "rg zoxide fzf fd yazi tmux lazygit sddm niri unzip"
   - AUR: "zen-browser-bin noctalia-shell"
 - **NVIDIA drivers** :(
 - **lazygit** setup
