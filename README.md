@@ -295,7 +295,7 @@ To use the correct region and language specific formatting
 # en_US.UTF-8 UTF-8
 # vi_VN UTF-8
 # ja_JP.UTF-8 UTF-8
-nvim /etc/locale.gen
+vim /etc/locale.gen
 
 # Generate locales by running:
 locale-gen
@@ -309,13 +309,14 @@ vim /etc/locale.conf
 # Add: LANG=en_US.UTF-8
 ```
 
-If you set the console keyboard layout, make the changes persistent in `/etc/vconsole.conf`:
+If you set the console keyboard layout, make the changes persistent in `/etc/vconsole.conf`
+by using `touch` and `vim`:
 
 ```txt
 KEYMAP=en
 ```
 
-Check the output (after reboot only):
+Check the output:
 
 ```bash
 localectl status
