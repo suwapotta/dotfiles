@@ -8,45 +8,10 @@
   "current_page_id": 0,
   "todos": [
     {
-      "id": 1769987276962,
-      "text": "[noctalia] Enable bluetooth",
-      "completed": false,
-      "createdAt": "2026-02-01T23:07:56.962Z",
-      "pageId": 0
-    },
-    {
-      "id": 1769873731422,
-      "text": "[tmux] Remake its dotfile",
-      "completed": false,
-      "createdAt": "2026-01-31T15:35:31.422Z",
-      "pageId": 0
-    },
-    {
-      "id": 1769683532604,
-      "text": "[niri + Noctalia] Finalize config",
-      "completed": false,
-      "createdAt": "2026-01-29T10:45:32.604Z",
-      "pageId": 0
-    },
-    {
       "id": 1769683944990,
       "text": "[nvim]  Check LSP/Formatter for all files",
       "completed": false,
       "createdAt": "2026-01-29T10:52:24.990Z",
-      "pageId": 0
-    },
-    {
-      "id": 1769683467344,
-      "text": "[sddm] Change theme",
-      "completed": false,
-      "createdAt": "2026-01-29T10:44:27.344Z",
-      "pageId": 0
-    },
-    {
-      "id": 1769683475966,
-      "text": "[grub] Change theme",
-      "completed": false,
-      "createdAt": "2026-01-29T10:44:35.966Z",
       "pageId": 0
     },
     {
@@ -90,9 +55,44 @@
       "completed": true,
       "createdAt": "2026-01-31T17:22:18.302Z",
       "pageId": 0
+    },
+    {
+      "id": 1769987276962,
+      "text": "[noctalia] Enable bluetooth",
+      "completed": true,
+      "createdAt": "2026-02-01T23:07:56.962Z",
+      "pageId": 0
+    },
+    {
+      "id": 1769873731422,
+      "text": "[tmux] Remake its dotfile",
+      "completed": true,
+      "createdAt": "2026-01-31T15:35:31.422Z",
+      "pageId": 0
+    },
+    {
+      "id": 1769683532604,
+      "text": "[niri + Noctalia] Finalize config",
+      "completed": true,
+      "createdAt": "2026-01-29T10:45:32.604Z",
+      "pageId": 0
+    },
+    {
+      "id": 1769683467344,
+      "text": "[sddm] Change theme",
+      "completed": true,
+      "createdAt": "2026-01-29T10:44:27.344Z",
+      "pageId": 0
+    },
+    {
+      "id": 1769683475966,
+      "text": "[grub] Change theme",
+      "completed": true,
+      "createdAt": "2026-01-29T10:44:35.966Z",
+      "pageId": 0
     }
   ],
   "count": 12,
-  "completedCount": 2,
+  "completedCount": 7,
   "isExpanded": false
 }
