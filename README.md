@@ -28,6 +28,8 @@
     - [Users](#users)
     - [Grub](#grub)
     - [Reboot](#reboot)
+  - [Post-installation](#post-installation)
+    - [Snapper](#snapper)
   - [TODO](#todo)
   <!--toc:end-->
 
@@ -206,7 +208,7 @@ so it is worth getting right.
 
 ```zsh
 # Install package
-pacman -S reflector
+pacman -Sy reflector
 
 # This may takes a while with 200 mirrors
 reflector --latest 200 --verbose --sort rate --save /etc/pacman.d/mirrorlist
@@ -319,7 +321,7 @@ nvim /etc/hostname
 # Create the /etc/hosts file. This is very important because it will resolve the
 # listed hostnames locally and not over Internet DNS.
 touch /etc/hosts
-nvim /etc/hoss
+nvim /etc/host
 
 # Change the content to match:
 # 127.0.0.1 localhost
@@ -369,11 +371,40 @@ umount -R /mnt
 reboot
 ```
 
+## Post-installation
+
+### Snapper
+
+```bash
+# Switch to root user if not already
+su
+
+# Install essential packages
+pacman -S snapper snap-pac
+
+# Avoid conflicting with previous sub-volume for next step
+umount /.snapshots
+rm -rf ./.snapshots
+
+# Start creating snapper configuration
+snapper -c root create-config /
+nvim /etc/snapper/configs/root
+### Edit the following:
+# ALLOW_USER="" -> Add username
+# Change the limit for timeline cleanup at the end of file
+
+# Visible for normal users
+chmod a+rx /.snapshots
+
+# Enable startup these services
+systemctl enable --now snapper-timeline.timer snapper-cleanup.timer grub-btrfs.service
+```
+
 Basically, Arch is now ready for use. If so, congrats!
 
 ## TODO
 
-- **snapper**: snapper + snap-pac + snaperGUI?
+- **networkmanager** for the first time after reboot
 - **reflector** configuration
 - **systemd**: enable bluetooth.service + reflector.timer
 - **paru**
