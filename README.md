@@ -43,7 +43,7 @@ match the real installation environment. The **main focus** of this guide
 is to have an Arch setup that uses _snapper_ as an alternative to _timeshift_,
 and also to quickly setup new machine as quick as possible.
 
-For virtual machine, enable **UEFI** and **3D acceleration**.
+For virtual machine, enable **UEFI**, **boot menu**, and **3D acceleration**.
 
 ## References
 
@@ -239,7 +239,7 @@ pacman -Syyy
 # "base-devel" 'makepkg -si'
 # "git" git stuffs
 # "bluez bluez-utils" bluetooth
-# "intel-ucode" microcode updates for gpu
+# "intel-ucode" microcode updates for intel cpu
 # "networkmanager" manage internet connection for both wire and wireless
 # "reflector" manages mirrorlist
 # "btrfs-progs" file system management
@@ -435,6 +435,11 @@ chmod a+rx /.snapshots
 
 # Enable startup these services
 systemctl enable --now snapper-timeline.timer snapper-cleanup.timer grub-btrfsd.service
+
+# TESTING: paru -S snapper-rollback
+
+# When done, execute
+reboot
 ```
 
 Basically, Arch is now ready for use. If so, congrats!
@@ -459,7 +464,7 @@ reboot
 
 ## TODO
 
-- **fcitx5** and Catpuccin theme
+- **fcitx5** and Catpuccin theme (AUR)
 - **MControlCenter**
 - **reflector** configuration
 - **systemd**: enable bluetooth.service + reflector.timer
