@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import qs.Commons
 import qs.Widgets
+import qs.Services.UI
 
 Item {
   id: root
@@ -63,7 +64,11 @@ Item {
 
       NText {
         anchors.verticalCenter: parent.verticalCenter
-        text: activeCount
+        text: {
+          var textKey = activeCount === 1 ? "bar_widget.todo_count_singular" : "bar_widget.todo_count_plural";
+          var text = pluginApi?.tr(textKey);
+          return text.replace("{count}", activeCount);
+        }
         color: root.contentColor
         pointSize: root.barFontSize
         applyUiScale: false
@@ -82,27 +87,29 @@ Item {
         applyUiScale: false
         color: root.contentColor
       }
-
-      NText {
-        anchors.horizontalCenter: parent.horizontalCenter
-        text: activeCount
-        color: root.contentColor
-        pointSize: root.barFontSize
-        applyUiScale: false
-      }
     }
   }
 
   MouseArea {
     id: mouseArea
     anchors.fill: parent
+    acceptedButtons: Qt.LeftButton | Qt.RightButton
     hoverEnabled: true
     cursorShape: Qt.PointingHandCursor
 
-    onClicked: {
-      if (pluginApi) {
-        Logger.i("Todo", "Opening Todo panel");
-        pluginApi.openPanel(root.screen);
+    onPressed: function(mouse) {
+      if (mouse.button === Qt.RightButton) {
+        // Open settings on right click
+        if (pluginApi && pluginApi.manifest) {
+          Logger.i("Todo", "Opening plugin settings");
+          BarService.openPluginSettings(root.screen, pluginApi.manifest);
+        }
+      } else if (mouse.button === Qt.LeftButton) {
+        // Open panel on left click
+        if (pluginApi) {
+          Logger.i("Todo", "Opening Todo panel");
+          pluginApi.openPanel(root.screen);
+        }
       }
     }
   }

@@ -29,10 +29,12 @@
     - [Grub](#grub)
     - [Reboot](#reboot)
   - [Post-installation](#post-installation)
+    - [Network Manager](#network-manager)
     - [AUR Helper](#aur-helper)
     - [Snapper](#snapper)
   - [Tips and Tricks](#tips-and-tricks)
     - [Snapper Recovery](#snapper-recovery)
+    - [Pacman is currently in use, please wait...](#pacman-is-currently-in-use-please-wait)
   - [TODO](#todo)
   <!--toc:end-->
 
@@ -337,7 +339,7 @@ nvim /etc/hostname
 # Create the /etc/hosts file. This is very important because it will resolve the
 # listed hostnames locally and not over Internet DNS.
 touch /etc/hosts
-nvim /etc/host
+nvim /etc/hosts
 
 # Change the content to match:
 # 127.0.0.1 localhost
@@ -467,16 +469,36 @@ btrfs subvolume snapshot /mnt/@snapshots/1/snapshot /mnt/@
 reboot
 ```
 
+### Pacman is currently in use
+
+This error can happens when there is a **lock file** is present at
+`/var/lib/pacman/db.lck`. Common situations that triggers usually
+are restoring from a backup, interrupted processes, etc.
+
+```fish
+# Quick fix
+sudo rm -f /var/lib/pacman/db.lck
+```
+
 ## TODO
 
-- **fcitx5** and Catpuccin theme (AUR)
 - **MControlCenter**
-- **reflector** configuration
-- **systemd**: enable bluetooth.service + reflector.timer
-- **paru**
 - **install.sh**: for dotfiles:
-  - Additional packages: "rg zoxide fzf fd yazi tmux lazygit sddm niri unzip"
-  - AUR: "zen-browser-bin noctalia-shell"
-- **NVIDIA drivers** :(
+  - **stow**
+  - **fish** + **starship** + **kitty** + **fisher**
+  - **yazi** + "rg zoxide poppler 7zip (jq: json preview)
+    fd rg fzf zoxide imagemagick wl-clipboard"
+  - **fcitx5**: "fcitx5 fcitx5-unikey fcitx5-mozc" +
+    _theme_: "catppuccin-fcitx5-git "
+  - **GUI**: "sddm niri noctalia-shell bto"
+  - **qt/gtk?**
+  - **Fonts**: "ttf-google-sans ttf-jetbrains-mono-nerd
+    ttf-nerd-fonts-symbols ttf-nerdfonts-symbols-common"
+  - **Icon**: "cosmic-icon-theme adwaita-icon-theme"
+  - **zen-browser-bin**
+  - **Anki** + **yomitan**
+  - **reflector** configuration
+- **systemd**: enable bluetooth.service + reflector.timer
 - **lazygit** setup
-- **QEMU** VMs
+- **NVIDIA drivers** :(
+- **QEMU** VMs + **tuned**

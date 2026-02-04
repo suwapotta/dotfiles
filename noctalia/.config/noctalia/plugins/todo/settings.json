@@ -12,87 +12,153 @@
       "text": "[nvim]  Check LSP/Formatter for all files",
       "completed": false,
       "createdAt": "2026-01-29T10:52:24.990Z",
-      "pageId": 0
+      "pageId": 0,
+      "priority": "medium",
+      "details": ""
     },
     {
       "id": 1769918167508,
       "text": "[QEMU] Add Arch lInux VM",
       "completed": false,
       "createdAt": "2026-02-01T03:56:07.508Z",
-      "pageId": 0
+      "pageId": 0,
+      "priority": "medium",
+      "details": ""
     },
     {
       "id": 1769683393086,
       "text": "[QEMU] Add NixOS VM",
       "completed": false,
       "createdAt": "2026-01-29T10:43:13.086Z",
-      "pageId": 0
+      "pageId": 0,
+      "priority": "medium",
+      "details": ""
     },
     {
       "id": 1769874260124,
       "text": "[dotfiles] Add a README.md about Arch install",
       "completed": false,
       "createdAt": "2026-01-31T15:44:20.124Z",
-      "pageId": 0
+      "pageId": 0,
+      "priority": "medium",
+      "details": ""
     },
     {
       "id": 1769874281973,
       "text": "[dotfiles] Create an install script for personal use",
       "completed": false,
       "createdAt": "2026-01-31T15:44:41.973Z",
-      "pageId": 0
+      "pageId": 0,
+      "priority": "medium",
+      "details": ""
     },
     {
       "id": 1769906933395,
       "text": "[nvim] kdl formatter",
       "completed": true,
       "createdAt": "2026-02-01T00:48:53.395Z",
-      "pageId": 0
+      "pageId": 0,
+      "priority": "medium",
+      "details": ""
     },
     {
       "id": 1769880138302,
       "text": "[Notaclia] Make terminal application runable from app lancher",
       "completed": true,
       "createdAt": "2026-01-31T17:22:18.302Z",
-      "pageId": 0
+      "pageId": 0,
+      "priority": "medium",
+      "details": ""
     },
     {
       "id": 1769987276962,
       "text": "[noctalia] Enable bluetooth",
       "completed": true,
       "createdAt": "2026-02-01T23:07:56.962Z",
-      "pageId": 0
+      "pageId": 0,
+      "priority": "medium",
+      "details": ""
     },
     {
       "id": 1769873731422,
       "text": "[tmux] Remake its dotfile",
       "completed": true,
       "createdAt": "2026-01-31T15:35:31.422Z",
-      "pageId": 0
+      "pageId": 0,
+      "priority": "medium",
+      "details": ""
     },
     {
       "id": 1769683532604,
       "text": "[niri + Noctalia] Finalize config",
       "completed": true,
       "createdAt": "2026-01-29T10:45:32.604Z",
-      "pageId": 0
+      "pageId": 0,
+      "priority": "medium",
+      "details": ""
     },
     {
       "id": 1769683467344,
       "text": "[sddm] Change theme",
       "completed": true,
       "createdAt": "2026-01-29T10:44:27.344Z",
-      "pageId": 0
+      "pageId": 0,
+      "priority": "medium",
+      "details": ""
     },
     {
       "id": 1769683475966,
       "text": "[grub] Change theme",
       "completed": true,
       "createdAt": "2026-01-29T10:44:35.966Z",
-      "pageId": 0
+      "pageId": 0,
+      "priority": "medium",
+      "details": ""
     }
   ],
   "count": 12,
   "completedCount": 7,
-  "isExpanded": false
+  "isExpanded": false,
+  "useCustomColors": false,
+  "priorityColors": {
+    "high": {
+      "r": 0.9529411792755127,
+      "g": 0.545098066329956,
+      "b": 0.658823549747467,
+      "a": 1,
+      "hsvHue": 0.9535277485847473,
+      "hsvSaturation": 0.4279850423336029,
+      "hsvValue": 0.9529411792755127,
+      "hslHue": 0.9535277485847473,
+      "hslSaturation": 0.8124971389770508,
+      "hslLightness": 0.7490196228027344,
+      "valid": true
+    },
+    "medium": {
+      "r": 0.7960784435272217,
+      "g": 0.6509804129600525,
+      "b": 0.9686274528503418,
+      "a": 1,
+      "hsvHue": 0.742805540561676,
+      "hsvSaturation": 0.32793164253234863,
+      "hsvValue": 0.9686274528503418,
+      "hslHue": 0.742805540561676,
+      "hslSaturation": 0.8350499868392944,
+      "hslLightness": 0.809811532497406,
+      "valid": true
+    },
+    "low": {
+      "r": 0.6392157077789307,
+      "g": 0.7058823704719543,
+      "b": 0.9215686321258545,
+      "a": 1,
+      "hsvHue": 0.6273055672645569,
+      "hsvSaturation": 0.30638590455055237,
+      "hsvValue": 0.9215686321258545,
+      "hslHue": 0.6273055672645569,
+      "hslSaturation": 0.6428626179695129,
+      "hslLightness": 0.7803921699523926,
+      "valid": true
+    }
+  }
 }
