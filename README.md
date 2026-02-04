@@ -201,11 +201,14 @@ umount /mnt
 mount -o compress=zstd,subvol=@ /dev/nvme0n1p3 /mnt
 
 # Apply Zstd compression + EFI
-mkdir -p /mnt/{home,var/log,.snapshots,efi}
+mkdir -p /mnt/{home,var/log,.snapshots,efi,btrfsroot}
 mount -o compress=zstd,subvol=@home /dev/nvme0n1p3 /mnt/home
 mount -o compress=zstd,subvol=@var_log /dev/nvme0n1p3 /mnt/var/log
 mount -o compress=zstd,subvol=@snapshots /dev/nvme0n1p3 /mnt/.snapshots
 mount /dev/nvme0n1p1 /mnt/efi
+
+# For snapper-rollback
+mount -o subvolid=5 /dev/nvme0n1p3 /mnt/btrfsroot
 
 # Enable SWAP
 swapon /dev/nvme0n1p2
@@ -437,10 +440,11 @@ chmod a+rx /.snapshots
 # Enable startup these services
 systemctl enable --now snapper-timeline.timer snapper-cleanup.timer grub-btrfsd.service
 
-# TESTING: paru -S snapper-rollback
-
 # When done, execute
 reboot
+
+# Log-in and continue with snapper-rollback
+paru -S snapper-rollback
 ```
 
 Basically, Arch is now ready for use. If so, congrats!
