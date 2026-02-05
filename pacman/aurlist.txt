@@ -1,0 +1,7 @@
+anki
+bibata-cursor-theme
+noctalia-shell
+snapper-rollback
+ttf-google-sans
+zen-browser-bin
+adw-gtk-theme

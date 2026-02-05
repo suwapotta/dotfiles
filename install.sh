@@ -54,6 +54,11 @@ function confirm() {
 }
 
 function changeSystemConfigs() {
+  ## 0. Confirmation
+  if ! confirm; then
+    exit
+  fi
+
   ## 1. pacman.conf
   # Backup
   if [[ ! -f "/etc/pacman.conf.bak" ]]; then
@@ -94,9 +99,36 @@ function changeSystemConfigs() {
   sudo systemctl enable --now bluetooth.service
 }
 
+function bulkInstall() {
+  local PKGAUR_DIR="$DOTFILES_DIR/pacman"
+
+  cat "$PKGAUR_DIR/pkglist.txt" | sudo pacman -S --needed -
+  paru -S --needed - <"$PKGAUR_DIR/aurlist.txt"
+}
+
+function stowDotfiles() {
+  local STOW_DIRS=(fastfetch fcitx5 fish kitty niri noctalia nvim snapper starship tmux)
+
+  for dir in "${STOW_DIRS[@]}"; do
+    stow "$dir"
+  done
+}
+
+function finalize() {
+  if ! confirm; then
+    exit
+  fi
+
+  sudo systemctl enable sddm.service
+
+  echo -e "${RED}Reboot time...${WHITE}"
+  countdown
+  reboot
+}
+
 ### Main program
-if ! confirm; then
-  exit
-fi
 
 changeSystemConfigs
+bulkInstall
+stowDotfiles
+finalize
