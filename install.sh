@@ -53,25 +53,43 @@ function confirm() {
   esac
 }
 
-function systemConfig() {
-  # pacman.conf
-  if [ ! -f "/etc/pacman.conf.bak" ]; then
+function changeSystemConfigs() {
+  ## 1. pacman.conf
+  # Backup
+  if [[ ! -f "/etc/pacman.conf.bak" ]]; then
     sudo cp -v "/etc/pacman.conf" "/etc/pacman.conf.bak"
   fi
+  # Replace
   sudo cp -v "$DOTFILES_DIR/pacman/pacman.conf" "/etc/pacman.conf"
 
-  # reflector.conf
+  ## 2. reflector.conf
   local REFLECTOR_DIR="/etc/xdg/reflector/"
-  if command -v reflector &>/dev/null; then
-    echo "Installing reflector..."
-    sudo pacman -S --needed reflector
+
+  echo "Checking for reflector..."
+  sudo pacman -S --needed --noconfirm reflector
+
+  # Safety check for first time installing
+  if [[ ! -d "$REFLECTOR_DIR" ]]; then
+    sudo mkdir -p "$REFLECTOR_DIR"
   fi
 
-  if [ ! -f "$REFLECTOR_DIR/reflector.conf.bak" ]; then
+  # Backup
+  if [[ ! -f "$REFLECTOR_DIR/reflector.conf.bak" ]]; then
     sudo cp -v "$REFLECTOR_DIR/reflector.conf" "$REFLECTOR_DIR/reflector.conf.bak"
   fi
-  sudo cp -v "$DOTFILES_DIR/pacman/pacman.conf" "/etc/pacman.conf"
+
+  # Replace
+  sudo cp -v "$DOTFILES_DIR/reflector/reflector.conf" "$REFLECTOR_DIR/reflector.conf"
+
+  # Enable weekly reflector service
   sudo systemctl enable --now reflector.timer
+
+  ## 3. bluez + bluez-utils
+  # Installing
+  sudo pacman -S --needed --noconfirm bluez bluez-utils
+
+  # Enable bluetooth service
+  sudo systemctl enable --now bluetooth.service
 }
 
 ### Main program
@@ -79,4 +97,4 @@ if ! confirm; then
   exit
 fi
 
-systemConfig
+changeSystemConfigs
