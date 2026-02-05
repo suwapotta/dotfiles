@@ -56,6 +56,7 @@ function confirm() {
 function changeSystemConfigs() {
   ## 1. pacman.conf
   # Backup
+  echo "${BLUE}::${WHITE} pacman.conf"
   if [[ ! -f "/etc/pacman.conf.bak" ]]; then
     sudo cp -v "/etc/pacman.conf" "/etc/pacman.conf.bak"
   fi
@@ -65,8 +66,8 @@ function changeSystemConfigs() {
   ## 2. reflector.conf
   local REFLECTOR_DIR="/etc/xdg/reflector/"
 
-  echo "Checking for reflector..."
-  sudo pacman -S --needed --noconfirm reflector
+  echo "${BLUE}::${WHITE} reflector.conf"
+  sudo pacman -Sy --needed --noconfirm reflector
 
   # Safety check for first time installing
   if [[ ! -d "$REFLECTOR_DIR" ]]; then
@@ -85,8 +86,9 @@ function changeSystemConfigs() {
   sudo systemctl enable --now reflector.timer
 
   ## 3. bluez + bluez-utils
+  echo "${BLUE}::${WHITE} bluetooth"
   # Installing
-  sudo pacman -S --needed --noconfirm bluez bluez-utils
+  sudo pacman -Sy --needed --noconfirm bluez bluez-utils
 
   # Enable bluetooth service
   sudo systemctl enable --now bluetooth.service
