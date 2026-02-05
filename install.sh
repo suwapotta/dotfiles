@@ -12,7 +12,10 @@ YELLOW="\e[0;33m"
 BLUE="\e[0;34m"
 WHITE="\e[0m"
 
-# Helper functions
+# Global variables
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+### Helper functions
 function countdown() {
   for i in {3..1}; do
     case "$i" in
@@ -50,11 +53,24 @@ function confirm() {
   esac
 }
 
+function systemConfig() {
+  # sudo pacman -S --needed reflector
+  # sudo cp -v /etc/xdg/reflector/reflector.conf /etc/xdg/reflector/reflector.conf.bak
+  # sudo cp -v "$DOTFILES_DIR"/reflector/reflector.conf /etc/xdg/reflector/reflector.conf
+  # sudo systemctl enable --now reflector.timer
+
+  # pacman.conf
+  if [ ! -f /etc/pacman.conf.bak ]; then
+    sudo cp -v /etc/pacman.conf /etc/pacman.conf.bak
+  fi
+  sudo cp -v "$DOTFILES_DIR"/pacman/pacman.conf /etc/pacman.conf
+
+  # reflector
+}
+
 ### Main program
 if ! confirm; then
   exit
 fi
 
-# pacman.conf
-sudo cp -v /etc/pacman.conf /etc/pacman.conf.bak
-sudo cp -v ~/dotfiles/pacman/pacman.conf /etc/pacman.conf
+systemConfig
