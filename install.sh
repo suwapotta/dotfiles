@@ -102,8 +102,8 @@ function changeSystemConfigs() {
 function bulkInstall() {
   local PKGAUR_DIR="$DOTFILES_DIR/pacman"
 
-  cat "$PKGAUR_DIR/pkglist.txt" | sudo pacman -S --needed -
-  paru -S --needed - <"$PKGAUR_DIR/aurlist.txt"
+  cat "$PKGAUR_DIR/pkglist.txt" | sudo pacman -S --needed --noconfirm -
+  paru -S --needed --noconfirm - <"$PKGAUR_DIR/aurlist.txt"
 }
 
 function stowDotfiles() {
