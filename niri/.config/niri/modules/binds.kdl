@@ -9,7 +9,7 @@ binds {
     // niri
     // Applications
     Mod+Return hotkey-overlay-title="Open Terminal" { spawn "kitty"; }
-    Mod+B hotkey-overlay-title="Open Zen Browser" { spawn "zen"; }
+    Mod+B hotkey-overlay-title="Open Zen Browser" { spawn "zen-browser"; }
     Mod+Z hotkey-overlay-title="Open Anki" { spawn "anki"; }
     Mod+E hotkey-overlay-title="Open files" { spawn "nautilus"; }
     Mod+Shift+E hotkey-overlay-title="Open yazi" { spawn-sh "kitty yazi"; }
@@ -135,7 +135,7 @@ binds {
 
     Mod+Shift+S hotkey-overlay-title="Snipping Tool" { screenshot show-pointer=false; }
 
-    Mod+P hotkey-overlay-title="Toggle transparency" { toggle-window-rule-opacity; }
+    Mod+X hotkey-overlay-title="Toggle transparency" { toggle-window-rule-opacity; }
 
     Mod+Insert hotkey-overlay-title="Toggle inhibit shortcuts" { toggle-keyboard-shortcuts-inhibit; }
 
@@ -147,6 +147,7 @@ binds {
     Mod+Alt+C hotkey-overlay-title="Calender" { spawn-sh "qs -c noctalia-shell ipc call calendar toggle"; }
     Mod+Delete hotkey-overlay-title="Session Menu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
     Mod+Alt+Down hotkey-overlay-title="System Monitor" { spawn-sh "qs -c noctalia-shell ipc call systemMonitor toggle"; }
+    Mod+P allow-when-locked=true hotkey-overlay-title="Play/Pause media" { spawn-sh "qs -c noctalia-shell ipc call media toggle"; }
     Mod+Shift+P allow-when-locked=true hotkey-overlay-title="Play/Pause media" { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
     Mod+Shift+N allow-when-locked=true hotkey-overlay-title="Next media" { spawn-sh "qs -c noctalia-shell ipc call media next"; }
     Mod+Shift+B allow-when-locked=true hotkey-overlay-title="Previous media" { spawn-sh "qs -c noctalia-shell ipc call media previous"; }

@@ -34,7 +34,7 @@
     - [Snapper](#snapper)
   - [Tips and Tricks](#tips-and-tricks)
     - [Snapper Recovery](#snapper-recovery)
-    - [Pacman is currently in use, please wait...](#pacman-is-currently-in-use-please-wait)
+    - [Pacman is currently in use](#pacman-is-currently-in-use)
   - [TODO](#todo)
   <!--toc:end-->
 
@@ -159,7 +159,7 @@ lsblk
 # Start partitioning by
 cfdisk /dev/nvme0n1 # TUI
 # or
-fdisk /dev/nvme0n1 # Terminal
+fdisk /dev/nvme0n1 # CLI
 ```
 
 ### Disk formatting
@@ -482,6 +482,8 @@ sudo rm -f /var/lib/pacman/db.lck
 
 ## TODO
 
+- **zen-browser-bin**
+  - **Anki** + **yomitan**
 - **MControlCenter**
 - **install.sh**: for dotfiles:
   - **stow**
@@ -490,13 +492,11 @@ sudo rm -f /var/lib/pacman/db.lck
     fd rg fzf zoxide imagemagick wl-clipboard"
   - **fcitx5**: "fcitx5 fcitx5-unikey fcitx5-mozc" +
     _theme_: "catppuccin-fcitx5-git "
-  - **GUI**: "sddm niri noctalia-shell bto"
+  - **GUI**: "sddm niri noctalia-shell btop bat cliphist"
   - **qt/gtk?**
   - **Fonts**: "ttf-google-sans ttf-jetbrains-mono-nerd
     ttf-nerd-fonts-symbols ttf-nerdfonts-symbols-common"
   - **Icon**: "cosmic-icon-theme adwaita-icon-theme"
-  - **zen-browser-bin**
-  - **Anki** + **yomitan**
   - **reflector** configuration
 - **systemd**: enable bluetooth.service + reflector.timer
 - **lazygit** setup

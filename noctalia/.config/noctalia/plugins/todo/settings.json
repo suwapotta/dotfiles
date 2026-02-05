@@ -17,28 +17,10 @@
       "details": ""
     },
     {
-      "id": 1769918167508,
-      "text": "[QEMU] Add Arch lInux VM",
-      "completed": false,
-      "createdAt": "2026-02-01T03:56:07.508Z",
-      "pageId": 0,
-      "priority": "medium",
-      "details": ""
-    },
-    {
       "id": 1769683393086,
       "text": "[QEMU] Add NixOS VM",
       "completed": false,
       "createdAt": "2026-01-29T10:43:13.086Z",
-      "pageId": 0,
-      "priority": "medium",
-      "details": ""
-    },
-    {
-      "id": 1769874260124,
-      "text": "[dotfiles] Add a README.md about Arch install",
-      "completed": false,
-      "createdAt": "2026-01-31T15:44:20.124Z",
       "pageId": 0,
       "priority": "medium",
       "details": ""
@@ -114,10 +96,28 @@
       "pageId": 0,
       "priority": "medium",
       "details": ""
+    },
+    {
+      "id": 1769918167508,
+      "text": "[QEMU] Add Arch lInux VM",
+      "completed": true,
+      "createdAt": "2026-02-01T03:56:07.508Z",
+      "pageId": 0,
+      "priority": "medium",
+      "details": ""
+    },
+    {
+      "id": 1769874260124,
+      "text": "[dotfiles] Add a README.md about Arch install",
+      "completed": true,
+      "createdAt": "2026-01-31T15:44:20.124Z",
+      "pageId": 0,
+      "priority": "medium",
+      "details": ""
     }
   ],
   "count": 12,
-  "completedCount": 7,
+  "completedCount": 9,
   "isExpanded": false,
   "useCustomColors": false,
   "priorityColors": {
