@@ -54,18 +54,24 @@ function confirm() {
 }
 
 function systemConfig() {
-  # sudo pacman -S --needed reflector
-  # sudo cp -v /etc/xdg/reflector/reflector.conf /etc/xdg/reflector/reflector.conf.bak
-  # sudo cp -v "$DOTFILES_DIR"/reflector/reflector.conf /etc/xdg/reflector/reflector.conf
-  # sudo systemctl enable --now reflector.timer
-
   # pacman.conf
-  if [ ! -f /etc/pacman.conf.bak ]; then
-    sudo cp -v /etc/pacman.conf /etc/pacman.conf.bak
+  if [ ! -f "/etc/pacman.conf.bak" ]; then
+    sudo cp -v "/etc/pacman.conf" "/etc/pacman.conf.bak"
   fi
-  sudo cp -v "$DOTFILES_DIR"/pacman/pacman.conf /etc/pacman.conf
+  sudo cp -v "$DOTFILES_DIR/pacman/pacman.conf" "/etc/pacman.conf"
 
-  # reflector
+  # reflector.conf
+  local REFLECTOR_DIR="/etc/xdg/reflector/"
+  if command -v reflector &>/dev/null; then
+    echo "Installing reflector..."
+    sudo pacman -S --needed reflector
+  fi
+
+  if [ ! -f "$REFLECTOR_DIR/reflector.conf.bak" ]; then
+    sudo cp -v "$REFLECTOR_DIR/reflector.conf" "$REFLECTOR_DIR/reflector.conf.bak"
+  fi
+  sudo cp -v "$DOTFILES_DIR/pacman/pacman.conf" "/etc/pacman.conf"
+  sudo systemctl enable --now reflector.timer
 }
 
 ### Main program
