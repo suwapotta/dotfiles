@@ -123,7 +123,10 @@ function finalize() {
   sudo systemctl enable sddm.service
   gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
   sudo snapper create -c root -c timeline -d "After install.sh"
+  sudo ln -s /home/"$USER"/.config/qt6ct /root/.config/qt6ct
 }
+
+# TODO: SKIP_SNAP_PAC=y doesn't work
 
 ### Main program
 

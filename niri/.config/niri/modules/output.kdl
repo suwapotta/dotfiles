@@ -1,10 +1,8 @@
 // https://yalter.github.io/niri/Configuration:-Outputs
 
 output "eDP-1" {
-    // off
     mode "1920x1080@60.001"
     scale 1
-    // backdrop-color "#00FFFF"
 
     hot-corners {
       // off

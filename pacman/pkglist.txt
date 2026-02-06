@@ -41,3 +41,4 @@ qt6ct
 nautilus
 cosmic-icon-theme
 adwaita-icon-theme
+polkit-gnome

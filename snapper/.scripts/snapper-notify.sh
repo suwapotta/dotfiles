@@ -23,7 +23,7 @@ inotifywait -m -e create --format '%f' "$WATCH_DIR" | while read -r SNAP_ID; do
       TYPE="single"
     fi
 
-    notify-send -a "Snapper" \
+    notify-send -e -a "Snapper" \
       -i "$ICON" \
       "New Snapshot: #$SNAP_ID ($TYPE)" \
       "$DESC"
