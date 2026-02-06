@@ -107,7 +107,7 @@ function bulkInstall() {
 }
 
 function stowDotfiles() {
-  local STOW_DIRS=(fastfetch fcitx5 fish kitty niri noctalia nvim snapper starship tmux)
+  local STOW_DIRS=(fastfetch fcitx5 fish gtk-3.0 gtk-4.0 kitty niri noctalia nvim qt5ct qt6ct snapper starship tmux)
 
   for dir in "${STOW_DIRS[@]}"; do
     stow "$dir"
@@ -121,15 +121,20 @@ function finalize() {
 
   fish -c "fisher update"
   sudo systemctl enable sddm.service
-
-  echo -e "${RED}Reboot time...${WHITE}"
-  countdown
-  reboot
+  gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
+  sudo snapper create -c root -c timeline -d "After install.sh"
 }
 
 ### Main program
+
+sudo snapper create -c root -c timeline -d "Before install.sh"
+START=$SECONDS
 
 changeSystemConfigs
 bulkInstall
 stowDotfiles
 finalize
+
+END=$SECONDS
+DURATION=$((END - START))
+echo -e "${YELLOW}Script ran for $DURATION seconds!${WHITE}"

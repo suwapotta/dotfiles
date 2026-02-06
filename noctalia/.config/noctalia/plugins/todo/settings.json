@@ -24,100 +24,10 @@
       "pageId": 0,
       "priority": "medium",
       "details": ""
-    },
-    {
-      "id": 1769874281973,
-      "text": "[dotfiles] Create an install script for personal use",
-      "completed": false,
-      "createdAt": "2026-01-31T15:44:41.973Z",
-      "pageId": 0,
-      "priority": "medium",
-      "details": ""
-    },
-    {
-      "id": 1769906933395,
-      "text": "[nvim] kdl formatter",
-      "completed": true,
-      "createdAt": "2026-02-01T00:48:53.395Z",
-      "pageId": 0,
-      "priority": "medium",
-      "details": ""
-    },
-    {
-      "id": 1769880138302,
-      "text": "[Notaclia] Make terminal application runable from app lancher",
-      "completed": true,
-      "createdAt": "2026-01-31T17:22:18.302Z",
-      "pageId": 0,
-      "priority": "medium",
-      "details": ""
-    },
-    {
-      "id": 1769987276962,
-      "text": "[noctalia] Enable bluetooth",
-      "completed": true,
-      "createdAt": "2026-02-01T23:07:56.962Z",
-      "pageId": 0,
-      "priority": "medium",
-      "details": ""
-    },
-    {
-      "id": 1769873731422,
-      "text": "[tmux] Remake its dotfile",
-      "completed": true,
-      "createdAt": "2026-01-31T15:35:31.422Z",
-      "pageId": 0,
-      "priority": "medium",
-      "details": ""
-    },
-    {
-      "id": 1769683532604,
-      "text": "[niri + Noctalia] Finalize config",
-      "completed": true,
-      "createdAt": "2026-01-29T10:45:32.604Z",
-      "pageId": 0,
-      "priority": "medium",
-      "details": ""
-    },
-    {
-      "id": 1769683467344,
-      "text": "[sddm] Change theme",
-      "completed": true,
-      "createdAt": "2026-01-29T10:44:27.344Z",
-      "pageId": 0,
-      "priority": "medium",
-      "details": ""
-    },
-    {
-      "id": 1769683475966,
-      "text": "[grub] Change theme",
-      "completed": true,
-      "createdAt": "2026-01-29T10:44:35.966Z",
-      "pageId": 0,
-      "priority": "medium",
-      "details": ""
-    },
-    {
-      "id": 1769918167508,
-      "text": "[QEMU] Add Arch lInux VM",
-      "completed": true,
-      "createdAt": "2026-02-01T03:56:07.508Z",
-      "pageId": 0,
-      "priority": "medium",
-      "details": ""
-    },
-    {
-      "id": 1769874260124,
-      "text": "[dotfiles] Add a README.md about Arch install",
-      "completed": true,
-      "createdAt": "2026-01-31T15:44:20.124Z",
-      "pageId": 0,
-      "priority": "medium",
-      "details": ""
     }
   ],
-  "count": 12,
-  "completedCount": 9,
+  "count": 2,
+  "completedCount": 0,
   "isExpanded": false,
   "useCustomColors": false,
   "priorityColors": {

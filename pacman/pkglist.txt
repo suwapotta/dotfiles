@@ -16,6 +16,7 @@ cava
 entr
 eza
 ripgrep
+zoxide
 fd
 fzf
 tldr
@@ -33,8 +34,10 @@ npm
 vulkan-intel
 wget
 mpv
-zoxide
+sddm
 xwayland-satellite
 qt6-base
 qt6ct
-sddm
+nautilus
+cosmic-icon-theme
+adwaita-icon-theme
