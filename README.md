@@ -32,6 +32,7 @@
     - [Network Manager](#network-manager)
     - [AUR Helper](#aur-helper)
     - [Snapper](#snapper)
+  - [Install script](#install-script)
   - [Tips and Tricks](#tips-and-tricks)
     - [Snapper Recovery](#snapper-recovery)
     - [Pacman is currently in use](#pacman-is-currently-in-use)
@@ -451,6 +452,21 @@ paru -S snapper-rollback
 
 Basically, Arch is now ready for use. If so, congrats!
 
+## Install script
+
+From now on, everything will be taken care by
+`install.sh` script:
+
+```bash
+# Cloning repo
+cd && git clone https://github.com/suwapotta/dotfiles.git
+
+# Running the script
+cd dotfiles
+chmod u+x install.sh
+./install.sh
+```
+
 ## Tips and Tricks
 
 ### Snapper Recovery
@@ -485,20 +501,6 @@ sudo rm -f /var/lib/pacman/db.lck
 - **zen-browser-bin**
   - **Anki** + **yomitan**
 - **MControlCenter**
-- **install.sh**: for dotfiles:
-  - **stow**
-  - **fish** + **starship** + **kitty** + **fisher**
-  - **yazi** + "rg zoxide poppler 7zip (jq: json preview)
-    fd rg fzf zoxide imagemagick wl-clipboard"
-  - **fcitx5**: "fcitx5 fcitx5-unikey fcitx5-mozc" +
-    _theme_: "catppuccin-fcitx5-git "
-  - **GUI**: "sddm niri noctalia-shell btop bat cliphist"
-  - **qt/gtk?**
-  - **Fonts**: "ttf-google-sans ttf-jetbrains-mono-nerd
-    ttf-nerd-fonts-symbols ttf-nerdfonts-symbols-common"
-  - **Icon**: "cosmic-icon-theme adwaita-icon-theme"
-  - **reflector** configuration
-- **systemd**: enable bluetooth.service + reflector.timer
 - **lazygit** setup
 - **NVIDIA drivers** :(
 - **QEMU** VMs + **tuned**

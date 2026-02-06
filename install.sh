@@ -119,6 +119,7 @@ function finalize() {
     exit
   fi
 
+  fish -c "fisher update"
   sudo systemctl enable sddm.service
 
   echo -e "${RED}Reboot time...${WHITE}"
