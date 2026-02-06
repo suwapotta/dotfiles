@@ -22,18 +22,6 @@ layout {
 
     default-column-width { proportion 0.5; }
 
-    // By default focus ring and border are rendered as a solid background rectangle
-    // behind windows. That is, they will show up through semitransparent windows.
-    // This is because windows using client-side decorations can have an arbitrary shape.
-    //
-    // If you don't like that, you should uncomment `prefer-no-csd` below.
-    // Niri will draw focus ring and border *around* windows that agree to omit their
-    // client-side decorations.
-    //
-    // Alternatively, you can override it with a window rule called
-    // `draw-border-with-background`.
-
-    // You can change how the focus ring looks.
     focus-ring {
         off
         width 3.5
@@ -67,15 +55,15 @@ layout {
         on
         width 3.2
 
-        urgent-color "#9b0000"
-        active-gradient from="#e5989b" to="#ffb4a2" angle=45 relative-to="workspace-view" in="oklch longer hue"
-        inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+        // urgent-color "#9b0000"
+        // active-gradient from="#e5989b" to="#ffb4a2" angle=45 relative-to="workspace-view" in="oklch longer hue"
+        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
 
     shadow {
         on
 
-        // draw-behind-window true
+        draw-behind-window true
         softness 30
         spread 5
         offset x=0 y=5
