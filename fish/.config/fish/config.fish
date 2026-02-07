@@ -52,6 +52,10 @@ function pacmanR
     pacman -Qq | fzf --multi --query "$argv" --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns
 end
 
+function pacmanQ
+    pacman -Qq | fzf --multi --query "$argv" --preview 'pacman -Qi {1}'
+end
+
 if status is-interactive # Commands to run in interactive sessions can go here
 
     # No greeting
