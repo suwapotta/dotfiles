@@ -26,11 +26,6 @@ function bind_dollar
 end
 
 function fish_user_key_bindings
-    bind ! bind_bang
-    bind '$' bind_dollar
-end
-
-function fish_user_key_bindings
     fish_vi_key_bindings
 
     bind -M insert \cr history-pager
@@ -47,6 +42,14 @@ function y
         builtin cd -- "$cwd"
     end
     rm -f -- "$tmp"
+end
+
+function pacmanS
+    pacman -Slq | fzf --multi --query "$argv" --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
+end
+
+function pacmanR
+    pacman -Qq | fzf --multi --query "$argv" --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns
 end
 
 if status is-interactive # Commands to run in interactive sessions can go here
