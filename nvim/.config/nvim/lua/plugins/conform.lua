@@ -5,6 +5,7 @@ return {
       arduino = { "clang-format" },
       verilog = { "verible" },
       systemverilog = { "verible" },
+      tex = { "latexindent" },
       -- kdl = { "kdlfmt" },
     })
     return opts

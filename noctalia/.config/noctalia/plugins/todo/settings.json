@@ -8,15 +8,6 @@
   "current_page_id": 0,
   "todos": [
     {
-      "id": 1769683944990,
-      "text": "[nvim]  Check LSP/Formatter for all files",
-      "completed": false,
-      "createdAt": "2026-01-29T10:52:24.990Z",
-      "pageId": 0,
-      "priority": "medium",
-      "details": ""
-    },
-    {
       "id": 1769683393086,
       "text": "[QEMU] Add NixOS VM",
       "completed": false,
@@ -26,7 +17,7 @@
       "details": ""
     }
   ],
-  "count": 2,
+  "count": 1,
   "completedCount": 0,
   "isExpanded": false,
   "useCustomColors": false,

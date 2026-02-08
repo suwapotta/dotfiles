@@ -6,7 +6,7 @@ layout {
 
     // Options: never, always, on-overflow
     center-focused-column "never"
-    always-center-single-column
+    // always-center-single-column
     // empty-workspace-above-first
     default-column-display "normal"
 
@@ -14,8 +14,6 @@ layout {
         proportion 0.33333
         proportion 0.5
         proportion 0.6667
-
-        proportion 1.0
     }
 
     // preset-window-heights {}
@@ -26,29 +24,10 @@ layout {
         off
         width 3.5
 
-        // Colors can be set in a variety of ways:
-        // - CSS named colors: "red"
-        // - RGB hex: "#rgb", "#rgba", "#rrggbb", "#rrggbbaa"
-        // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
-
         // active-color "#7fc8ff"
         inactive-color "#505050"
         urgent-color "#9b0000"
-
-        // You can also use gradients. They take precedence over solid colors.
-        // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
-        // The angle is the same as in linear-gradient, and is optional,
-        // defaulting to 180 (top-to-bottom gradient).
-        // You can use any CSS linear-gradient tool on the web to set these up.
-        // Changing the color space is also supported, check the wiki for more info.
-        //
         active-gradient from="#80c8ff" to="#c7ff7f" angle=45
-
-        // You can also color the gradient relative to the entire view
-        // of the workspace, rather than relative to just the window itself.
-        // To do that, set relative-to="workspace-view".
-        //
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
 
     border {
@@ -84,9 +63,9 @@ layout {
         // active-color "red"
         // inactive-color "gray"
         // urgent-color "blue"
-        active-gradient from="#80c8ff" to="#bbddff" angle=45
-        inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
-        urgent-gradient from="#800" to="#a33" angle=45
+        // active-gradient from="#80c8ff" to="#bbddff" angle=45
+        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+        // urgent-gradient from="#800" to="#a33" angle=45
 
     }
 

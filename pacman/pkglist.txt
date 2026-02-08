@@ -23,6 +23,8 @@ tldr
 lazygit
 cliphist
 zathura
+zathura-pdf-mupdf
+zathura-djvu
 7zip
 inotify-tools
 intel-media-driver
@@ -42,3 +44,7 @@ nautilus
 cosmic-icon-theme
 adwaita-icon-theme
 polkit-gnome
+python-pynvim
+texlive-meta
+texlive-langother
+libxcrypt-compact

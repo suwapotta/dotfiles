@@ -6,48 +6,37 @@ animations {
 
     // Individual animations
     workspace-switch {
-
     }
 
     window-open {
-
     }
 
     window-close {
-
     }
 
 
     horizontal-view-movement  {
-
     }
 
     window-movement {
-
     }
 
 
     window-resize {
-
     }
 
     config-notification-open-close {
-
     }
 
     exit-confirmation-open-close {
-
     }
 
     screenshot-ui-open {
-
     }
 
     overview-open-close {
-
     }
 
     recent-windows-close {
-
     }
 }

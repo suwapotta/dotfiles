@@ -44,19 +44,19 @@ function y
     rm -f -- "$tmp"
 end
 
-function pacmanS
+function pacmanSync
     pacman -Slq | fzf --multi --query "$argv" --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
 end
 
-function pacmanR
+function pacmanRemove
     pacman -Qq | fzf --multi --query "$argv" --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns
 end
 
-function pacmanQ
+function pacmanQuery
     pacman -Qq | fzf --multi --query "$argv" --preview 'pacman -Qi {1}'
 end
 
-function paruS
+function paruSync
     set keyword $argv
 
     if test -z "$keyword"
