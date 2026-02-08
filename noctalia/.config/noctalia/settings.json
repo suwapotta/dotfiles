@@ -567,10 +567,6 @@
             },
             {
                 "enabled": true,
-                "id": "zathura"
-            },
-            {
-                "enabled": true,
                 "id": "niri"
             },
             {
@@ -588,6 +584,10 @@
             {
                 "enabled": true,
                 "id": "zenBrowser"
+            },
+            {
+                "enabled": true,
+                "id": "zathura"
             }
         ],
         "enableUserTheming": false
