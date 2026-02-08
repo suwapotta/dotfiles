@@ -2,7 +2,7 @@
 
 animations {
     on
-    slowdown 1.75
+    slowdown 1.5
 
     // Individual animations
     workspace-switch {

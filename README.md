@@ -42,8 +42,10 @@
 ## Notes
 
 This guide is meant to test within a virtual machine first, so it may not
-match the real installation environment. The **main focus** of this guide
-is to have an Arch setup that uses _snapper_ as an alternative to _timeshift_,
+match the real installation environment. This is intended for my personal
+use, use with your own risk, the script may be unstable.
+The **main focus** of this guide is to have an Arch setup that
+uses _snapper_ as an alternative to _timeshift_,
 and also to quickly setup new machine as quick as possible.
 
 For virtual machine, enable **UEFI**, **boot menu**, and **3D acceleration**.
@@ -74,11 +76,11 @@ pacman-key -v archlinux-version-x86_64.iso.sig
 ### Boot into live environment
 
 > [!NOTE]
-> Remember to disable secure boot option just for safe.
+> Remember to disable secure boot option.
 
 Copy/move the `iso` file into USB (Ventoy) and enter the live environment.
 The path for USB should be: `/run/media/$USER/Ventoy/`, and should be ejected
-after the USB's LED stop blinking.
+after the USB's LED done transferring (stop blinking in my case).
 
 Example:
 
@@ -88,9 +90,16 @@ cp ~/Downloads/iso/archlinux-2026.02.01-x86_64.iso /run/media/suwapotta/Ventoy/
 
 ### Set keyboard layout
 
+> [!NOTE]
+> Before starting, may want to enable vim mode in `zsh` shell
+>
+> ```zsh
+> bindkey -v
+> ```
+
 ```zsh
 localectl list-keymaps
-# Should have en in the list, or just directly use this command
+# Find your in the list, and load it using command
 loadkeys en
 ```
 
@@ -128,13 +137,13 @@ staion wlan0 connect ...
 Finally, check for connection:
 
 ```zsh
-ping -c 3 ping.archlinux.org
+ping -c 5 ping.archlinux.org
 ```
 
 ### Update system clock
 
 ```zsh
-# Check if ntp is active and if the time is right
+# Check if NTP is active and if the time is right
 timedatectl
 
 # In case it's not active you can do
@@ -143,6 +152,8 @@ timedatectl set-ntp true
 
 ### Disk partitioning
 
+This setup only works for **Arch** as the only OS
+on the system.
 Layout after this step should look:
 
 | Partition | Type             | Size            |
@@ -158,9 +169,9 @@ fdisk -l
 lsblk
 
 # Start partitioning by
-cfdisk /dev/nvme0n1 # TUI
-# or
 fdisk /dev/nvme0n1 # CLI
+# or
+cfdisk /dev/nvme0n1 # TUI
 ```
 
 ### Disk formatting
@@ -199,11 +210,11 @@ btrfs subvolume create /mnt/@home
 btrfs subvolume create /mnt/@var_log
 btrfs subvolume create /mnt/@snapshots
 
-# Unmount the root fs
+# Unmount the root partition
 umount /mnt
 mount -o compress=zstd,subvol=@ /dev/nvme0n1p3 /mnt
 
-# Apply Zstd compression + EFI
+# Apply ZSTD compression + EFI
 mkdir -p /mnt/{home,var/log,.snapshots,efi,btrfsroot}
 mount -o compress=zstd,subvol=@home /dev/nvme0n1p3 /mnt/home
 mount -o compress=zstd,subvol=@var_log /dev/nvme0n1p3 /mnt/var/log
@@ -213,7 +224,7 @@ mount /dev/nvme0n1p1 /mnt/efi
 # For snapper-rollback
 mount -o subvolid=5 /dev/nvme0n1p3 /mnt/btrfsroot
 
-# Enable SWAP
+# Enable SWAP partition
 swapon /dev/nvme0n1p2
 ```
 
@@ -243,7 +254,7 @@ pacman -Syyy
 # "sof-firmware" onboard audio (e.g., IEM)
 # "openssh" allow ssh and manage keys
 # "base-devel" 'makepkg -si'
-# "git" git stuffs
+# "git" version control
 # "bluez bluez-utils" bluetooth
 # "intel-ucode" microcode updates for intel cpu
 # "networkmanager" manage internet connection for both wire and wireless
@@ -257,7 +268,7 @@ pacman -Syyy
 # "wireplumber" pipewire session manager
 # "vim neovim" text editor
 
-pacstrap -K /mnt 'packages'
+pacstrap -K /mnt 'insertPackagesHere'
 ```
 
 ### Fstab
@@ -301,7 +312,7 @@ To use the correct region and language specific formatting
 # en_US.UTF-8 UTF-8
 # vi_VN UTF-8
 # ja_JP.UTF-8 UTF-8
-vim /etc/locale.gen
+nvim /etc/locale.gen
 
 # Generate locales by running:
 locale-gen
@@ -311,7 +322,7 @@ Set the locale to the desired one:
 
 ```bash
 touch /etc/locale.conf
-vim /etc/locale.conf
+nvim /etc/locale.conf
 # Add: LANG=en_US.UTF-8
 ```
 
@@ -322,7 +333,7 @@ by using `touch` and `vim`:
 KEYMAP=en
 ```
 
-Check the output:
+Check the output (after rebooting):
 
 ```bash
 localectl status
@@ -405,7 +416,9 @@ nmtui
 
 ### AUR Helper
 
-My personal choice is `paru`:
+My personal choice is `paru` (`yay` doesn't require you
+to look at **PKGBUILD** during installation but best practice
+is you should look before installing anything from the AUR):
 
 ```bash
 sudo pacman -S --needed base-devel
@@ -437,10 +450,10 @@ nvim /etc/snapper/configs/root
 # ALLOW_USER="" -> Add username
 # Change the limit for timeline cleanup at the end of file
 
-# Visible for normal users
+# Make visible for normal users
 chmod a+rx /.snapshots
 
-# Enable startup these services
+# Enable startup for essential services
 systemctl enable --now snapper-timeline.timer snapper-cleanup.timer grub-btrfsd.service
 
 # When done, execute
@@ -500,7 +513,7 @@ sudo rm -f /var/lib/pacman/db.lck
 
 - **zen-browser-bin**
   - **Anki** + **yomitan**
-- **MControlCenter**
+- **MControlCenter** (MSI Laptop)
 - **lazygit** setup
 - **NVIDIA drivers** :(
-- **QEMU** VMs + **tuned**
+- **QEMU** VMs + **tuned** service

@@ -7,6 +7,8 @@ return {
         "lua",
         "vim",
         "bash",
+        "zsh",
+        "fish",
         "kitty",
         "json",
         "arduino",
