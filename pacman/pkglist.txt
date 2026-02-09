@@ -48,3 +48,4 @@ python-pynvim
 texlive-meta
 texlive-langother
 libxcrypt-compact
+libnotify

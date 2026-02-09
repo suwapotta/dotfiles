@@ -73,7 +73,7 @@ function changeSystemConfigs() {
 
   ## 2. reflector.conf
   local REFLECTOR_DIR="/etc/xdg/reflector"
-  sudo pacman -S --needed --noconfirm reflector
+  sudo SNAP_PAC_SKIP=y pacman -S --needed --noconfirm reflector
 
   # Safety check for first time installing
   if [[ ! -d "$REFLECTOR_DIR" ]]; then
@@ -93,7 +93,7 @@ function changeSystemConfigs() {
 
   ## 3. bluez + bluez-utils
   # Installing
-  sudo pacman -S --needed --noconfirm bluez bluez-utils
+  sudo SNAP_PAC_SKIP=y pacman -S --needed --noconfirm bluez bluez-utils
 
   # Enable bluetooth service
   sudo systemctl enable --now bluetooth.service
@@ -102,12 +102,12 @@ function changeSystemConfigs() {
 function bulkInstall() {
   local PKGAUR_DIR="$DOTFILES_DIR/pacman"
 
-  cat "$PKGAUR_DIR/pkglist.txt" | sudo pacman -S --needed --noconfirm -
-  paru -S --needed --noconfirm - <"$PKGAUR_DIR/aurlist.txt"
+  cat "$PKGAUR_DIR/pkglist.txt" | sudo SNAP_PAC_SKIP=y pacman -S --needed --noconfirm -
+  SNAP_PAC_SKIP=y paru -S --needed --noconfirm - <"$PKGAUR_DIR/aurlist.txt"
 }
 
 function stowDotfiles() {
-  local STOW_DIRS=(fastfetch fcitx5 fish gtk-3.0 gtk-4.0 kitty niri noctalia nvim qt5ct qt6ct snapper starship tmux)
+  local STOW_DIRS=(btop cava fastfetch fcitx5 fish gtk-3.0 gtk-4.0 kitty niri noctalia nvim qt5ct qt6ct snapper starship tmux yazi zathura)
 
   for dir in "${STOW_DIRS[@]}"; do
     stow "$dir"
@@ -125,8 +125,6 @@ function finalize() {
   sudo snapper create -c root -c timeline -d "After install.sh"
   sudo ln -s /home/"$USER"/.config/qt6ct /root/.config/qt6ct
 }
-
-# TODO: SKIP_SNAP_PAC=y doesn't work
 
 ### Main program
 

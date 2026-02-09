@@ -242,7 +242,7 @@ pacman -Sy reflector
 # This may takes a while with 200 mirrors
 reflector --latest 200 --verbose --sort rate --save /etc/pacman.d/mirrorlist
 
-## Resync servers
+# Resync servers
 pacman -Syyy
 ```
 
@@ -484,7 +484,17 @@ chmod u+x install.sh
 
 ### Snapper Recovery
 
-This allows us to restore a snapper snapshot even if the system is bricked.
+For normal case, to restore to previous snapshot:
+
+```fish
+# List all available snapshots
+snapper ls
+
+# Rollback to desired snapshot (replace 999 with your choice)
+sudo snapper-rollback 999
+```
+
+Moreover, this allows us to restore a snapper snapshot even if the system is **_bricked_**.
 Start with booting into an **Arch live environment**, and execute the following:
 
 ```bash
@@ -514,6 +524,6 @@ sudo rm -f /var/lib/pacman/db.lck
 - **zen-browser-bin**
   - **Anki** + **yomitan**
 - **MControlCenter** (MSI Laptop)
-- **lazygit** setup
 - **NVIDIA drivers** :(
+- **lazygit** setup
 - **QEMU** VMs + **tuned** service

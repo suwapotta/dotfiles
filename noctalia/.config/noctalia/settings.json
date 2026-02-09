@@ -329,6 +329,11 @@
         "enabled": false,
         "gridSnap": false,
         "monitorWidgets": [
+            {
+                "name": "eDP-1",
+                "widgets": [
+                ]
+            }
         ]
     },
     "dock": {
@@ -596,7 +601,7 @@
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
         "boxBorderEnabled": false,
-        "fontDefault": "Google Sans Medium",
+        "fontDefault": "Google Sans Display Medium",
         "fontDefaultScale": 1,
         "fontFixed": "JetBrainsMono Nerd Font Mono",
         "fontFixedScale": 1,

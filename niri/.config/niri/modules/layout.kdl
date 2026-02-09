@@ -6,7 +6,7 @@ layout {
 
     // Options: never, always, on-overflow
     center-focused-column "never"
-    // always-center-single-column
+    always-center-single-column
     // empty-workspace-above-first
     default-column-display "normal"
 
