@@ -33,6 +33,7 @@
     - [AUR Helper](#aur-helper)
     - [Snapper](#snapper)
   - [Install script](#install-script)
+  - [ZRAM](#zram)
   - [Tips and Tricks](#tips-and-tricks)
     - [Snapper Recovery](#snapper-recovery)
     - [Pacman is currently in use](#pacman-is-currently-in-use)
@@ -468,16 +469,36 @@ Basically, Arch is now ready for use. If so, congrats!
 ## Install script
 
 From now on, everything will be taken care by
-`install.sh` script:
+`install.sh` script (may want to disable something for VM):
 
 ```bash
 # Cloning repo
 cd && git clone https://github.com/suwapotta/dotfiles.git
 
-# Running the script
 cd dotfiles
+# Edit (if needed)
+nvim install.sh
+
+# Running the script
 chmod u+x install.sh
 ./install.sh
+```
+
+- **Post-script manual intervention**
+  - Nothing for now...
+
+## ZRAM
+
+ZRAM is beneficial as it acts as modern SWAP but
+with _CPU tax_ for compressing and decompressing (can
+replace the traditional SWAP partition).
+
+```bash
+sudo pacman -S zram-generator
+
+# Add only this line to use default configuration
+# [zram0]
+sudo nvim /etc/systemd/zram-generator.conf
 ```
 
 ## Tips and Tricks
