@@ -153,6 +153,11 @@ timedatectl set-ntp true
 
 ### Disk partitioning
 
+> [!NOTE]
+> As this guide updated with **ZRAM** as alternative for Linux Swap
+> however it is still useful to include here if you intended to use hibernation
+> or just having a potato PC.
+
 This setup only works for **Arch** as the only OS
 on the system.
 Layout after this step should look:
@@ -466,6 +471,20 @@ paru -S snapper-rollback
 
 Basically, Arch is now ready for use. If so, congrats!
 
+## ZRAM
+
+ZRAM is beneficial as it acts as modern SWAP but
+with _CPU tax_ for compressing and decompressing (can
+replace the traditional SWAP partition).
+
+```bash
+sudo pacman -S zram-generator
+
+# Add only this line to use default configuration
+# [zram0]
+sudo nvim /etc/systemd/zram-generator.conf
+```
+
 ## Install script
 
 From now on, everything will be taken care by
@@ -486,20 +505,6 @@ chmod u+x install.sh
 
 - **Post-script manual intervention**
   - Nothing for now...
-
-## ZRAM
-
-ZRAM is beneficial as it acts as modern SWAP but
-with _CPU tax_ for compressing and decompressing (can
-replace the traditional SWAP partition).
-
-```bash
-sudo pacman -S zram-generator
-
-# Add only this line to use default configuration
-# [zram0]
-sudo nvim /etc/systemd/zram-generator.conf
-```
 
 ## Tips and Tricks
 
