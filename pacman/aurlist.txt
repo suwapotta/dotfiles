@@ -4,4 +4,3 @@ bibata-cursor-theme
 adw-gtk-theme
 ttf-google-sans
 catppuccin-fcitx5-git 
-anki-bin

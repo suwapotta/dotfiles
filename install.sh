@@ -14,23 +14,24 @@ WHITE="\e[0m"
 
 # Global variables
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CONFIG_DIR="$HOME/.config"
 
 ### Helper functions
 function countdown() {
   for i in {3..1}; do
     case "$i" in
     3)
-      COLOR=$RED
+      CURRENT_COLOR=$RED
       ;;
     2)
-      COLOR=$YELLOW
+      CURRENT_COLOR=$YELLOW
       ;;
     1)
-      COLOR=$GREEN
+      CURRENT_COLOR=$GREEN
       ;;
     esac
 
-    printf "\r${BLUE}::${WHITE} Starting in ${COLOR}%d${WHITE}..." "$i"
+    printf "\r${BLUE}::${WHITE} Starting in ${CURRENT_COLOR}%d${WHITE}..." "$i"
     sleep 1
   done
 
@@ -54,14 +55,9 @@ function confirm() {
 }
 
 function changeSystemConfigs() {
-  ## 0. Confirmation
-  if ! confirm; then
-    exit
-  fi
-
   ## 1. pacman.conf
   # Backup
-  if [[ ! -f "/etc/pacman.conf.bak" ]]; then
+  if [[ ! -f "" ]]; then
     sudo cp -v "/etc/pacman.conf" "/etc/pacman.conf.bak"
   fi
 
@@ -102,40 +98,85 @@ function changeSystemConfigs() {
 function bulkInstall() {
   local PKGAUR_DIR="$DOTFILES_DIR/pacman"
 
+  # Offical packages
   cat "$PKGAUR_DIR/pkglist.txt" | sudo SNAP_PAC_SKIP=y pacman -S --needed --noconfirm -
-  SNAP_PAC_SKIP=y paru -S --needed --noconfirm - <"$PKGAUR_DIR/aurlist.txt"
+
+  # AURs
+  # NOTE: Can't skip snap-pac here using paru
+  paru -S --needed --noconfirm - <"$PKGAUR_DIR/aurlist.txt"
 }
 
 function stowDotfiles() {
   local STOW_DIRS=(btop cava fastfetch fcitx5 fish gtk-3.0 gtk-4.0 kitty niri noctalia nvim qt5ct qt6ct snapper starship tmux yazi zathura)
 
+  # Check and convert to .bak if there exists any config file
+  cd "$DOTFILES_DIR" || return
   for dir in "${STOW_DIRS[@]}"; do
-    stow "$dir"
+    case "$dir" in
+    "snapper")
+      local currentTarget="$HOME/.scripts/snapper-notify.sh"
+      ;;
+    "starship")
+      local currentTarget="$CONFIG_DIR/starship.toml"
+      ;;
+    "tmux")
+      local currentTarget="$HOME/.tmux.conf"
+      ;;
+    *)
+      local currentTarget="$CONFIG_DIR/$dir"
+      ;;
+    esac
+
+    if [[ -e "$currentTarget" && ! -L "$currentTarget" ]]; then
+      mv "$currentTarget" "${currentTarget}.bak"
+    fi
+
+    stow -R -v "$dir"
   done
 }
 
-function finalize() {
-  if ! confirm; then
-    exit
+function others() {
+  # Install fish's plugins
+  fish -c "fisher update"
+
+  # Ensure there is tmux's plugin mangager (tpm)
+  if [[ ! -e "$HOME/.tmux/plugins/tpm" ]]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   fi
 
-  fish -c "fisher update"
+  # Start-up login screen
   sudo systemctl enable sddm.service
+
+  # GTK Theme
   gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
-  sudo snapper create -c root -c timeline -d "After install.sh"
-  sudo ln -s /home/"$USER"/.config/qt6ct /root/.config/qt6ct
+
+  # Symlink qt6 config for root
+  local QT6_ROOTDIR="/root/.config/qt6ct"
+  sudo mkdir -p "$QT6_ROOTDIR"
+  sudo ln -s "/home/$USER/.config/qt6ct" "$QT6_ROOTDIR"
 }
 
-### Main program
+### MAIN PROGRAM
 
-sudo snapper create -c root -c timeline -d "Before install.sh"
+# Start timer + Before script snapshot
 START=$SECONDS
+sudo snapper create -c root -c timeline -d "Before install.sh"
 
+# Confirmation
+if ! confirm; then
+  exit
+fi
+
+# Calling defined functions
 changeSystemConfigs
 bulkInstall
 stowDotfiles
-finalize
+others
 
+# Finishing backup
+sudo snapper create -c root -c timeline -d "After install.sh"
+
+# Return script runtime
 END=$SECONDS
 DURATION=$((END - START))
 echo -e "${YELLOW}Script ran for $DURATION seconds!${WHITE}"

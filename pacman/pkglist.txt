@@ -25,7 +25,11 @@ cliphist
 zathura
 zathura-pdf-mupdf
 zathura-djvu
+anki
+btrfs-assistant
+nwg-look
 7zip
+unzip
 inotify-tools
 intel-media-driver
 intel-ucode
