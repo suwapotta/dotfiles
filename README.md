@@ -32,8 +32,8 @@
     - [Network Manager](#network-manager)
     - [AUR Helper](#aur-helper)
     - [Snapper](#snapper)
-  - [Install script](#install-script)
   - [ZRAM](#zram)
+  - [Install script](#install-script)
   - [Tips and Tricks](#tips-and-tricks)
     - [Snapper Recovery](#snapper-recovery)
     - [Pacman is currently in use](#pacman-is-currently-in-use)
@@ -92,7 +92,7 @@ cp ~/Downloads/iso/archlinux-2026.02.01-x86_64.iso /run/media/suwapotta/Ventoy/
 ### Set keyboard layout
 
 > [!NOTE]
-> Before starting, may want to enable vim mode in `zsh` shell
+> Before starting, may want to enable vim mode in `zsh` shell:
 >
 > ```zsh
 > bindkey -v
@@ -294,6 +294,13 @@ cat /mnt/etc/fstab
 # To access to our new system, we chroot into it
 arch-chroot /mnt
 ```
+
+> [!NOTE]
+> Before continuing, may want to enable vim mode in `bash` shell:
+>
+> ```bash
+> set -o vi
+> ```
 
 ### Timezone
 
