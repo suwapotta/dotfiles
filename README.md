@@ -15,8 +15,14 @@
     - [Internet connection](#internet-connection)
     - [Update system clock](#update-system-clock)
     - [Disk partitioning](#disk-partitioning)
+      - [Single disk partitioning](#single-disk-partitioning)
+      - [Multiple disks partitioning](#multiple-disks-partitioning)
     - [Disk formatting](#disk-formatting)
+      - [Single disk formatting](#single-disk-formatting)
+      - [Multiple disks formatting](#multiple-disks-formatting)
     - [Disk mounting](#disk-mounting)
+      - [Single disk mounting](#single-disk-mounting)
+      - [Multiple disks mounting](#multiple-disks-mounting)
   - [Main installation](#main-installation)
     - [Select mirrors](#select-mirrors)
     - [Package Installation](#package-installation)
@@ -154,19 +160,26 @@ timedatectl set-ntp true
 ### Disk partitioning
 
 > [!NOTE]
-> As this guide updated with **ZRAM** as alternative for Linux Swap
+> As this guide updated with **ZRAM** as an alternative for Linux Swap partition
 > however it is still useful to include here if you intended to use hibernation
-> or just having a potato PC.
+> (should be equal to RAM for stability)
+> or want to have Swap partition as final fallback.
 
-This setup only works for **Arch** as the only OS
-on the system.
+This setup only works for **Arch** as the only OS on the system.
+If you plan to use 2 disks all for **Arch Linux**, better to use
+one for `root` and storing `snapshots` , and other one for `home`.
+This simplifies the reinstallation for system if something in `root`
+goes wrong.
+
+#### Single disk partitioning
+
 Layout after this step should look:
 
-| Partition | Type             | Size            |
-| --------- | ---------------- | --------------- |
-| 1         | EFI              | 1 GiB           |
-| 2         | Linux Swap       | 4 GiB           |
-| 3         | Linux Filesystem | Remaining space |
+| Partition | Type                  | Size            |
+| --------- | --------------------- | --------------- |
+| 1         | EFI                   | 1 GiB           |
+| 2         | Linux Swap (optional) | 4 GiB           |
+| 3         | Linux Filesystem      | Remaining space |
 
 ```zsh
 # Check the disk directories/properties by using either
@@ -180,7 +193,30 @@ fdisk /dev/nvme0n1 # CLI
 cfdisk /dev/nvme0n1 # TUI
 ```
 
+#### Multiple disks partitioning
+
+Similarly, assume `sda` is the primary disk which we will use for **system/OS**
+(plus **snapshots**) and `sbd` is the secondary disk for **user data**.
+
+Layout after this step should look:
+
+- Primary `/dev/sda`:
+
+| Partition | Type             | Size            |
+| --------- | ---------------- | --------------- |
+| 1         | EFI              | 1 GiB           |
+| 2         | Linux Filesystem | Remaining space |
+
+- Secondary `/dev/sdb`:
+
+| Partition | Type                  | Size            |
+| --------- | --------------------- | --------------- |
+| 1         | Linux Swap (optional) | 4 GiB           |
+| 2         | Linux Filesystem      | Remaining space |
+
 ### Disk formatting
+
+#### Single disk formatting
 
 ```zsh
 ### Example:
@@ -195,9 +231,29 @@ mkswap /dev/nvme0n1p2
 mkfs.btrfs /dev/nvme0n1p3
 ```
 
+#### Multiple disks formatting
+
+```zsh
+### Example:
+# NAME    MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+# sda     8:0    0 500.0G  0 disk
+# ├─sda1  8:1    0     1G  0 part
+# └─sda2  8:2    0 499.0G  0 part
+# sdb     8:16   0   1.0T  0 disk
+# ├─sdb1  8:17   0     4G  0 part
+# └─sdb2  8:18   0 996.0G  0 part
+
+mkfs.fat -F 32 /dev/sda1
+mkfs.btrfs /dev/sda2
+mkswap /dev/sdb1
+mkfs.btrfs /dev/sdb2
+```
+
 ### Disk mounting
 
 > [!IMPORTANT]
+> Recommended layout by **Arch Wiki** (required for using
+> `snapper-rollback`):
 >
 > | Subvolume  | Mountpoint  |
 > | ---------- | ----------- |
@@ -206,7 +262,16 @@ mkfs.btrfs /dev/nvme0n1p3
 > | @var_log   | /var/log    |
 > | @snapshots | /.snapshots |
 
+#### Single disk mounting
+
 ```zsh
+### Example:
+# NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+# nvme0n1     259:0    0 476.9G  0 disk
+# ├─nvme0n1p1 259:1    0     1G  0 part
+# ├─nvme0n1p2 259:2    0     4G  0 part
+# └─nvme0n1p3 259:3    0 471.9G  0 part
+
 # Preparing
 mount /dev/nvme0n1p3 /mnt
 
@@ -234,6 +299,47 @@ mount -o subvolid=5 /dev/nvme0n1p3 /mnt/btrfsroot
 swapon /dev/nvme0n1p2
 ```
 
+#### Multiple disks mounting
+
+```zsh
+### Example:
+# NAME    MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+# sda     8:0    0 500.0G  0 disk
+# ├─sda1  8:1    0     1G  0 part
+# └─sda2  8:2    0 499.0G  0 part
+# sdb     8:16   0   1.0T  0 disk
+# ├─sdb1  8:17   0     4G  0 part
+# └─sdb2  8:18   0 996.0G  0 part
+
+# Create subvolumes
+## 1. Primary
+mount /dev/sda2 /mnt
+btrfs subvolume create /mnt/@
+btrfs subvolume create /mnt/@var_log
+btrfs subvolume create /mnt/@snapshots
+umount /mnt
+## 2. Secondary
+mount /dev/sdb2 /mnt
+btrfs subvolume create /mnt/@home
+umount /mnt
+
+# Mounting for installation and make necessary directories
+mount -o compress=zstd,subvol=@ /dev/sda2 /mnt
+mkdir -p /mnt/{home,var/log,.snapshots,efi,btrfsroot}
+
+# Apply ZSTD compression + EFI
+mount -o compress=zstd,subvol=@home /dev/sdb2 /mnt
+mount -o compress=zstd,subvol=@var_log /dev/sdb2 /mnt/var/log
+mount -o compress=zstd,subvol=@snapshots /dev/sdb2 /mnt/home
+mount /dev/sda1 /mnt/efi
+
+# For snapper-rollback
+mount -o subvolid=5 /dev/sda2 /mnt/btrfsroot
+
+# Enable SWAP partition
+swapon /dev/sdb1
+```
+
 ## Main installation
 
 ### Select mirrors
@@ -259,7 +365,7 @@ pacman -Syyy
 # "man sudo" essentials
 # "sof-firmware" onboard audio (e.g., IEM)
 # "openssh" allow ssh and manage keys
-# "base-devel" 'makepkg -si'
+# "base-devel" tools for making package
 # "git" version control
 # "bluez bluez-utils" bluetooth
 # "intel-ucode" microcode updates for intel cpu
@@ -274,7 +380,7 @@ pacman -Syyy
 # "wireplumber" pipewire session manager
 # "vim neovim" text editor
 
-pacstrap -K /mnt 'insertPackagesHere'
+pacstrap -K /mnt ...
 ```
 
 ### Fstab
