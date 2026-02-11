@@ -1,0 +1,8 @@
+{
+  "updateIntervalMinutes": 300,
+  "updateTerminalCommand": "foot -e",
+  "currentIconName": "package",
+  "hideOnZero": false,
+  "customCmdGetNumUpdates": "",
+  "customCmdDoSystemUpdate": "paru -Syu"
+}

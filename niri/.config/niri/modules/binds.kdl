@@ -12,9 +12,9 @@ binds {
     Mod+Shift+Return hotkey-overlay-title="Open floating Terminal" { spawn-sh "kitty --class=floating.kitty"; }
     Mod+B hotkey-overlay-title="Open Zen Browser" { spawn "zen-browser"; }
     Mod+Z hotkey-overlay-title="Open Anki" { spawn "anki"; }
-    Mod+E hotkey-overlay-title="Open files" { spawn "nautilus"; }
-    Mod+Shift+E hotkey-overlay-title="Open yazi" { spawn-sh "kitty yazi"; }
-    Control+Shift+Escape hotkey-overlay-title="Open btop++" { spawn-sh "kitty --class=floating.btop btop"; }
+    Mod+Shift+E hotkey-overlay-title="Open files" { spawn "nautilus"; }
+    Mod+E hotkey-overlay-title="Open yazi" { spawn-sh "kitty -e yazi"; }
+    Control+Shift+Escape hotkey-overlay-title="Open btop++" { spawn-sh "kitty -e --class=floating.btop btop"; }
 
     // Navigations
     Mod+O repeat=false { toggle-overview; }

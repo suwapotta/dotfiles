@@ -616,7 +616,8 @@ chmod u+x install.sh
 ```
 
 - **Post-script manual intervention**
-  - Nothing for now...
+  - **zen-browser-bin**: Go to `about:config` and set `toolkit.legacyUserProfileCustomizations.stylesheets`
+    to `true`. And `yomitan` with Anki integration for auto card generator.
 
 ## Tips and Tricks
 

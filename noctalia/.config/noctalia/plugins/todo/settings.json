@@ -8,12 +8,12 @@
   "current_page_id": 0,
   "todos": [
     {
-      "id": 1769683393086,
-      "text": "[QEMU] Add NixOS VM",
+      "id": 1770798999058,
+      "text": "[LFS] Make a bootable system",
       "completed": false,
-      "createdAt": "2026-01-29T10:43:13.086Z",
+      "createdAt": "2026-02-11T08:36:39.059Z",
       "pageId": 0,
-      "priority": "medium",
+      "priority": "high",
       "details": ""
     }
   ],

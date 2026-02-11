@@ -92,12 +92,21 @@
                 },
                 {
                     "clockColor": "none",
-                    "customFont": "Google Sans Display",
+                    "customFont": "Symbols Nerd Font",
                     "formatHorizontal": "h:mm AP ddd MMM d",
                     "formatVertical": "HH mm - dd MM",
                     "id": "Clock",
                     "tooltipFormat": "HH:mm ddd, MMM dd",
                     "useCustomFont": false
+                },
+                {
+                    "defaultSettings": {
+                        "currentIconName": "world-download",
+                        "hideOnZero": false,
+                        "updateIntervalMinutes": 30,
+                        "updateTerminalCommand": "foot -e"
+                    },
+                    "id": "plugin:update-count"
                 },
                 {
                     "compactMode": true,
