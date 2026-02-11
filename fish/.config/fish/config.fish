@@ -92,6 +92,7 @@ if status is-interactive # Commands to run in interactive sessions can go here
     alias ls 'eza --icons'
     alias clear "printf '\033[2J\033[3J\033[1;1H'"
     alias rg grep
+    alias tldrQuery 'tldr -l | fzf --preview "tldr {1} --color=always" --preview-window=right,70% | xargs tldr'
 
     # fzf.fish plugin
     fzf_configure_bindings --history= --directory=\ct --variables=\e\cv

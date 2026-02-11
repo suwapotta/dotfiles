@@ -48,12 +48,11 @@
 
 ## Notes
 
-This guide is meant to test within a virtual machine first, so it may not
-match the real installation environment. This is intended for my personal
-use, use with your own risk, the script may be unstable.
+This guide is intended for _my personal use_,
+use with your own risk, the script may be unstable.
 The **main focus** of this guide is to have an Arch setup that
 uses _snapper_ as an alternative to _timeshift_,
-and also to quickly setup new machine as quick as possible.
+and also to setup new machine as fast as possible.
 
 For virtual machine, enable **UEFI**, **boot menu**, and **3D acceleration**.
 
