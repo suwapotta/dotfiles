@@ -107,7 +107,7 @@ function bulkInstall() {
 }
 
 function stowDotfiles() {
-  local STOW_DIRS=(btop cava fastfetch fcitx5 fish gtk-3.0 gtk-4.0 kitty niri noctalia nvim qt5ct qt6ct snapper starship tmux yazi zathura)
+  local STOW_DIRS=(btop cava fastfetch fcitx5 fish gtk-3.0 gtk-4.0 kitty niri noctalia nvim qt5ct qt6ct snapper starship tealdeer tmux yazi zathura)
 
   # Check and convert to .bak if there exists any config file
   cd "$DOTFILES_DIR" || return
@@ -139,7 +139,7 @@ function others() {
   # Install fish's plugins
   fish -c "fisher update"
 
-  # Ensure there is tmux's plugin mangager (tpm)
+  # Install tmux's plugin mangager (tpm)
   if [[ ! -e "$HOME/.tmux/plugins/tpm" ]]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   fi
@@ -154,6 +154,9 @@ function others() {
   local QT6_ROOTDIR="/root/.config/qt6ct"
   sudo mkdir -p "$QT6_ROOTDIR"
   sudo ln -s "/home/$USER/.config/qt6ct" "$QT6_ROOTDIR"
+
+  # Update cache for tldr
+  tldr --update
 }
 
 ### MAIN PROGRAM
