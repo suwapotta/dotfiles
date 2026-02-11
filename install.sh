@@ -155,8 +155,10 @@ function others() {
   sudo mkdir -p "$QT6_ROOTDIR"
   sudo ln -s "/home/$USER/.config/qt6ct" "$QT6_ROOTDIR"
 
-  # Update cache for tldr
-  tldr --update
+  # First update cache for tealdeer
+  if [[ -e "$HOME/.cache/tealdeer/tldr-pages/pages.en/" ]]; then
+    tldr --update
+  fi
 }
 
 ### MAIN PROGRAM

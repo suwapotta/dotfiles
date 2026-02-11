@@ -19,7 +19,7 @@ ripgrep
 zoxide
 fd
 fzf
-tldr
+tealdeer
 lazygit
 cliphist
 zathura
