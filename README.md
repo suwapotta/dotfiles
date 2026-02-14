@@ -35,6 +35,7 @@
     - [Grub](#grub)
     - [Reboot](#reboot)
   - [Post-installation](#post-installation)
+    - [Quick locale check](#quick-locale-check)
     - [Network Manager](#network-manager)
     - [AUR Helper](#aur-helper)
     - [Snapper](#snapper)
@@ -451,14 +452,6 @@ by using `touch` and `vim`:
 KEYMAP=en
 ```
 
-Check the output (after rebooting):
-
-```bash
-localectl status
-# System Locale: LANG=en_US.UTF-8
-#     VC Keymap: en
-```
-
 ### Hostname
 
 ```bash
@@ -520,6 +513,17 @@ reboot
 ```
 
 ## Post-installation
+
+### Quick locale check
+
+Check the output:
+
+```bash
+localectl status
+# System Locale: LANG=en_US.UTF-8
+#   VC Keymap: en
+#   X11 Layout: (unset)
+```
 
 ### Network Manager
 

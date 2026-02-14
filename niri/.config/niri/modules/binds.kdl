@@ -153,7 +153,7 @@ binds {
     Mod+Shift+B allow-when-locked=true hotkey-overlay-title="Previous media" { spawn-sh "qs -c noctalia-shell ipc call media previous"; }
     Mod+Shift+Alt+W hotkey-overlay-title="Set Wallpaper" { spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle"; }
     Mod+N hotkey-overlay-title="Note Panel" { spawn-sh "qs -c noctalia-shell ipc call plugin:todo togglePanel"; }
-    Mod+T hotkey-overlay-title="notifications Panel" { spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory"; }
+    Mod+T hotkey-overlay-title="Notifications Panel" { spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory"; }
     Mod+Shift+T hotkey-overlay-title="Clear oldest notifications" { spawn-sh "qs -c noctalia-shell ipc call notifications removeOldestHistory"; }
     Mod+Alt+Up hotkey-overlay-title="Toggle Bar Visibilty" { spawn-sh "qs -c noctalia-shell ipc call bar toggle"; }
     XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
