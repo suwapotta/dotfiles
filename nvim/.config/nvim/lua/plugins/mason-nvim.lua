@@ -19,6 +19,7 @@ return {
       "pyright",
       "ruff",
       "prettier",
+      "fish-lsp",
       -- "kdlfmt",
     },
   },

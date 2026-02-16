@@ -6,18 +6,8 @@
     }
   ],
   "current_page_id": 0,
-  "todos": [
-    {
-      "id": 1770798999058,
-      "text": "[LFS] Make a bootable system",
-      "completed": false,
-      "createdAt": "2026-02-11T08:36:39.059Z",
-      "pageId": 0,
-      "priority": "high",
-      "details": ""
-    }
-  ],
-  "count": 1,
+  "todos": [],
+  "count": 0,
   "completedCount": 0,
   "isExpanded": false,
   "useCustomColors": false,

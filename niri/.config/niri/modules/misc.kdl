@@ -2,6 +2,7 @@
 
 spawn-sh-at-startup "qs -c noctalia-shell"
 spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+spawn-sh-at-startup "mcontrolcenter"
 spawn-sh-at-startup "~/.scripts/snapper-notify.sh"
 
 // Remove border for gtk applications
