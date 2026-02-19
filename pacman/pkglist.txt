@@ -51,5 +51,5 @@ polkit-gnome
 python-pynvim
 texlive-meta
 texlive-langother
-libxcrypt-compact
+libxcrypt-compat
 libnotify
