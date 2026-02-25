@@ -84,8 +84,12 @@
           "desc": "Toggle Bar Visibilty"
         },
         {
-          "keys": "Super + Insert",
+          "keys": "Super + Alt + T",
           "desc": "Toggle DND"
+        },
+        {
+          "keys": "Super + Insert",
+          "desc": "Cycle power profiles"
         }
       ]
     },
