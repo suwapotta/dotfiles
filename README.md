@@ -668,5 +668,6 @@ sudo rm -f /var/lib/pacman/db.lck
   - **Anki** + **yomitan**
 - **MControlCenter** (MSI Laptop)
 - **NVIDIA drivers** :(
+- **linux-zen**
 - **lazygit** setup
 - **QEMU** VMs + **tuned** service

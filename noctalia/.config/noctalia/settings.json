@@ -145,7 +145,7 @@
                     "compactMode": false,
                     "compactShowAlbumArt": true,
                     "compactShowVisualizer": false,
-                    "hideMode": "hidden",
+                    "hideMode": "transparent",
                     "hideWhenIdle": false,
                     "id": "MediaMini",
                     "maxWidth": 145,
@@ -242,9 +242,6 @@
                     "icon": "settings-star",
                     "id": "ControlCenter",
                     "useDistroLogo": true
-                },
-                {
-                    "id": "plugin:keybind-cheatsheet"
                 }
             ]
         }
@@ -419,7 +416,7 @@
         },
         "language": "",
         "lockOnSuspend": true,
-        "lockScreenAnimations": false,
+        "lockScreenAnimations": true,
         "lockScreenBlur": 0.89,
         "lockScreenCountdownDuration": 5000,
         "lockScreenMonitors": [
@@ -664,7 +661,7 @@
         "fontDefaultScale": 1,
         "fontFixed": "JetBrainsMono Nerd Font Mono",
         "fontFixedScale": 1,
-        "networkPanelView": "ethernet",
+        "networkPanelView": "wifi",
         "panelBackgroundOpacity": 0.93,
         "panelsAttachedToBar": true,
         "settingsPanelMode": "attached",

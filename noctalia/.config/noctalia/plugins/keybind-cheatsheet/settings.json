@@ -82,6 +82,10 @@
         {
           "keys": "Super + Alt + Up",
           "desc": "Toggle Bar Visibilty"
+        },
+        {
+          "keys": "Super + Insert",
+          "desc": "Toggle DND"
         }
       ]
     },
@@ -508,7 +512,7 @@
           "desc": "Toggle transparency"
         },
         {
-          "keys": "Super + Insert",
+          "keys": "Super + Shift + Insert",
           "desc": "Toggle inhibit shortcuts"
         }
       ]
@@ -518,7 +522,8 @@
   "niriConfigPath": "~/.config/niri/config.kdl",
   "hyprlandConfigPath": "~/.config/hypr/hyprland.conf",
   "modKeyVariable": "$mod",
-  "windowHeight": 850,
+  "windowHeight": 1000,
   "windowWidth": 1500,
-  "columnCount": 3
+  "columnCount": 3,
+  "autoHeight": true
 }

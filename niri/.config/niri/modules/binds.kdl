@@ -137,7 +137,7 @@ binds {
 
     Mod+X hotkey-overlay-title="Toggle transparency" { toggle-window-rule-opacity; }
 
-    Mod+Insert hotkey-overlay-title="Toggle inhibit shortcuts" { toggle-keyboard-shortcuts-inhibit; }
+    Mod+Shift+Insert hotkey-overlay-title="Toggle inhibit shortcuts" { toggle-keyboard-shortcuts-inhibit; }
 
     // Noctalia shell
     Alt+Space hotkey-overlay-title="Application Launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
@@ -156,6 +156,7 @@ binds {
     Mod+T hotkey-overlay-title="Notifications Panel" { spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory"; }
     Mod+Shift+T hotkey-overlay-title="Clear oldest notifications" { spawn-sh "qs -c noctalia-shell ipc call notifications removeOldestHistory"; }
     Mod+Alt+Up hotkey-overlay-title="Toggle Bar Visibilty" { spawn-sh "qs -c noctalia-shell ipc call bar toggle"; }
+    Mod+Insert hotkey-overlay-title="Toggle DND" { spawn-sh "qs -c noctalia-shell ipc call notifications toggleDND"; }
     XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
     XF86AudioLowerVolume  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease"; }
     XF86AudioMute         allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteOutput"; }
