@@ -30,6 +30,11 @@
       "keyColor": "yellow"
     },
     {
+      "type": "initsystem",
+      "key": "├",
+      "keyColor": "yellow"
+    },
+    {
       "type": "kernel",
       "key": "├",
       "keyColor": "yellow"

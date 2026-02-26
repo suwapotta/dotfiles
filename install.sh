@@ -10,7 +10,7 @@ RED="\e[0;31m"
 GREEN="\e[0;32m"
 YELLOW="\e[0;33m"
 BLUE="\e[0;34m"
-WHITE="\e[0m"
+NOCOLOR="\e[0m"
 
 # Global variables
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -31,7 +31,7 @@ function countdown() {
       ;;
     esac
 
-    printf "\r${BLUE}::${WHITE} Starting in ${CURRENT_COLOR}%d${WHITE}..." "$i"
+    printf "\r${BLUE}::${NOCOLOR} Starting in ${CURRENT_COLOR}%d${NOCOLOR}..." "$i"
     sleep 1
   done
 
@@ -39,7 +39,7 @@ function countdown() {
 }
 
 function confirm() {
-  echo -en "${URED}Do you wish to continue?${WHITE} [Y/n] "
+  echo -en "${URED}Do you wish to continue?${NOCOLOR} [Y/n] "
   read -r CONFIRMATION
 
   case "$CONFIRMATION" in
@@ -48,7 +48,7 @@ function confirm() {
     return 0
     ;;
   *)
-    echo "${RED}Aborting...${WHITE}"
+    echo "${RED}Aborting...${NOCOLOR}"
     return 1
     ;;
   esac
@@ -57,7 +57,7 @@ function confirm() {
 function changeSystemConfigs() {
   ## 1. pacman.conf
   # Backup
-  if [[ ! -f "" ]]; then
+  if [[ ! -e "/etc/pacman.conf.bak" ]]; then
     sudo cp -v "/etc/pacman.conf" "/etc/pacman.conf.bak"
   fi
 
@@ -77,7 +77,7 @@ function changeSystemConfigs() {
   fi
 
   # Backup
-  if [[ ! -f "$REFLECTOR_DIR/reflector.conf.bak" ]]; then
+  if [[ ! -e "$REFLECTOR_DIR/reflector.conf.bak" ]]; then
     sudo cp -v "$REFLECTOR_DIR/reflector.conf" "$REFLECTOR_DIR/reflector.conf.bak"
   fi
 
@@ -107,6 +107,11 @@ function bulkInstall() {
 }
 
 function stowDotfiles() {
+  if ! stow --version &>/dev/null; then
+    echo "${RED}ERROR${NOCOLOR}: ${BLUE}stow${NOCOLOR} not available!"
+    return 1
+  fi
+
   local STOW_DIRS=(btop cava fastfetch fcitx5 fish gtk-3.0 gtk-4.0 kitty niri noctalia nvim qt5ct qt6ct snapper starship tealdeer tmux yazi zathura)
 
   # Check and convert to .bak if there exists any config file
@@ -128,7 +133,7 @@ function stowDotfiles() {
     esac
 
     if [[ -e "$currentTarget" && ! -L "$currentTarget" ]]; then
-      mv "$currentTarget" "${currentTarget}.bak"
+      mv -v "$currentTarget" "${currentTarget}.bak"
     fi
 
     stow -R -v "$dir"
@@ -153,21 +158,31 @@ function others() {
   # Symlink qt6 config for root
   local QT6_ROOTDIR="/root/.config/qt6ct"
   sudo mkdir -p "$QT6_ROOTDIR"
-  sudo ln -s "/home/$USER/.config/qt6ct" "$QT6_ROOTDIR"
+  sudo ln -fs "/home/$USER/.config/qt6ct" "$QT6_ROOTDIR"
 
   # First update cache for tealdeer
-  if [[ -e "$HOME/.cache/tealdeer/tldr-pages/pages.en/" ]]; then
+  if [[ ! -e "$HOME/.cache/tealdeer/tldr-pages/pages.en/" ]]; then
     tldr --update
   fi
 }
 
 ### MAIN PROGRAM
+# Exit whenever there is error
+set -euo pipefail
+
+# Ask for password and keep sudo alive throughout script
+sudo --validate
+while true; do
+  sudo -n true
+  sleep 60
+  kill -0 "$$" || exit
+done 2>/dev/null &
 
 # Start timer + Before script snapshot
 START=$SECONDS
 sudo snapper create -c root -c timeline -d "Before install.sh"
 
-# Confirmation
+# Initial confirmation
 if ! confirm; then
   exit
 fi
@@ -184,4 +199,4 @@ sudo snapper create -c root -c timeline -d "After install.sh"
 # Return script runtime
 END=$SECONDS
 DURATION=$((END - START))
-echo -e "${YELLOW}Script ran for $DURATION seconds!${WHITE}"
+echo -e "${YELLOW}Script ran for $DURATION seconds!${NOCOLOR}"

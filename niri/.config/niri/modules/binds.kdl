@@ -17,6 +17,9 @@ binds {
     Control+Shift+Escape hotkey-overlay-title="Open btop++" { spawn-sh "kitty -e --class=floating.btop btop"; }
 
     // Navigations
+    Mod+MouseBack    repeat=false { focus-workspace-down; }
+    Mod+MouseForward repeat=false { focus-workspace-up; }
+
     Mod+O repeat=false { toggle-overview; }
     Mod+Q repeat=false { close-window; }
 

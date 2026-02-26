@@ -637,6 +637,7 @@ chmod u+x install.sh
 - **Post-script manual intervention**
   - **zen-browser-bin**: Go to `about:config` and set `toolkit.legacyUserProfileCustomizations.stylesheets`
     to `true`. And `yomitan` with Anki integration for auto card generator.
+  - **tmux**: Start a new session and press "CtrlB+R" then "I".
 
 ## Tips and Tricks
 
