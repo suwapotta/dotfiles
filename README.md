@@ -50,7 +50,7 @@
 ## Notes
 
 This guide is intended for _my personal use_,
-use with your own risk, the script may be unstable.
+use with your own risk, the script may be unstable (currently).
 The **main focus** of this guide is to have an Arch setup that
 uses _snapper_ as an alternative to _timeshift_,
 and also to setup new machine as fast as possible.
@@ -83,7 +83,7 @@ pacman-key -v archlinux-version-x86_64.iso.sig
 ### Boot into live environment
 
 > [!NOTE]
-> Remember to disable secure boot option.
+> Remember to disable secure boot option in BIOS.
 
 Copy/move the `iso` file into USB (Ventoy) and enter the live environment.
 The path for USB should be: `/run/media/$USER/Ventoy/`, and should be ejected
@@ -106,7 +106,7 @@ cp ~/Downloads/iso/archlinux-2026.02.01-x86_64.iso /run/media/suwapotta/Ventoy/
 
 ```zsh
 localectl list-keymaps
-# Find your in the list, and load it using command
+# Find your in the list, and load it using command loadkeys. E.g.,
 loadkeys en
 ```
 
@@ -119,7 +119,7 @@ set-font ter-132b
 
 ### Verify boot mode
 
-Check that we are in UEFI mode:
+Check that we are in **UEFI** mode:
 
 ```zsh
 cat /sys/firmware/efi/fw_platform_size
@@ -351,7 +351,7 @@ so it is worth getting right.
 # Install package
 pacman -Sy reflector
 
-# This may takes a while with 200 mirrors
+# This may takes a while with 200 mirrors (can be skipped)
 reflector --latest 200 --verbose --sort rate --save /etc/pacman.d/mirrorlist
 
 # Resync servers
@@ -361,19 +361,22 @@ pacman -Syyy
 ### Package Installation
 
 ```zsh
-# "base linux linux-firmware" REQUIRED
-# "man sudo" essentials
+# "base linux-firmware" REQUIRED
+# "linux" stable kernel
+# "linux-zen" performance-focused kernel
+# "linux-lts" long term support kernel (backup kernel)
+# "man sudo" man pages and grant temporary root permission
 # "sof-firmware" onboard audio (e.g., IEM)
 # "openssh" allow ssh and manage keys
 # "base-devel" tools for making package
 # "git" version control
 # "bluez bluez-utils" bluetooth
-# "intel-ucode" microcode updates for intel cpu
-# "networkmanager" manage internet connection for both wire and wireless
+# "intel-ucode" microcode updates for intel cpu (amd-ucode for AMD CPU)
+# "networkmanager" manage internet connection for both wire and wireless connection
 # "reflector" manages mirrorlist
 # "btrfs-progs" file system management
-# "efibootmgr" require for grub
-# "grub" bootloader
+# "efibootmgr" required for grub
+# "grub" powerful bootloader
 # "grub-btrfs" btrfs support and snapshot boot menu
 # "inotify-tools" watch for changes (snapshot)
 # "pipewire pipewire-alsa pipewire-pulse pipewire-jack" audio framework
@@ -411,6 +414,12 @@ arch-chroot /mnt
 ### Timezone
 
 ```bash
+# List all available timezones
+timedatectl list-timezones
+
+# Or more user-friendly version :)
+tzselect
+
 # Add a symlink to local time
 ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 
@@ -446,9 +455,9 @@ nvim /etc/locale.conf
 ```
 
 If you set the console keyboard layout, make the changes persistent in `/etc/vconsole.conf`
-by using `touch` and `vim`:
+by using `touch` and `nvim`:
 
-```txt
+```conf
 KEYMAP=en
 ```
 
@@ -464,9 +473,9 @@ nvim /etc/hostname
 touch /etc/hosts
 nvim /etc/hosts
 
-# Change the content to match:
+# Change the content to match (replace Arch with your hostname):
 # 127.0.0.1 localhost
-# ::1 localhost
+# ::1       localhost
 # 127.0.1.1 Arch
 ```
 
@@ -499,7 +508,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 ### Reboot
 
 ```bash
-# For internet connection
+# Enable internet connection daemon
 systemctl enable NetworkManager
 
 # Exit from chroot
@@ -556,9 +565,12 @@ makepkg -si
 
 ```bash
 # Switch to root user if not already
+# Or just spam 'sudo' at the beginning of every command below
 su
 
 # Install essential packages
+## "snapper" alternative to timeshift
+## "snap-pac" auto-snapshot pacman hook
 pacman -S snapper snap-pac
 
 # Avoid conflicting with previous sub-volume for next step
@@ -576,7 +588,7 @@ nvim /etc/snapper/configs/root
 chmod a+rx /.snapshots
 
 # Enable startup for essential services
-systemctl enable --now snapper-timeline.timer snapper-cleanup.timer grub-btrfsd.service
+systemctl enable --now grub-btrfsd.service snapper-timeline.timer snapper-cleanup.timer
 
 # When done, execute
 reboot

@@ -6,75 +6,12 @@ function fish_prompt -d "Write out the prompt"
         (set_color $fish_color_cwd) (prompt_pwd) (set_color normal)
 end
 
-function bind_bang
-    switch (commandline -t)[-1]
-        case "!"
-            commandline -t -- $history[1]
-            commandline -f repaint
-        case "*"
-            commandline -i !
-    end
-end
-
-function bind_dollar
-    switch (commandline -t)[-1]
-        case "!"
-            commandline -f backward-delete-char history-token-search-backward
-        case "*"
-            commandline -i '$'
-    end
-end
-
-function fish_user_key_bindings
-    fish_vi_key_bindings
-
-    bind -M insert \cr history-pager
-    bind -M insert \cp up-or-search
-    bind -M insert \cn down-or-search
-    bind -M insert ! bind_bang
-    bind -M insert '$' bind_dollar
-end
-
-function y
-    set tmp (mktemp -t "yazi-cwd.XXXXXX")
-    command yazi $argv --cwd-file="$tmp"
-    if read -z cwd <"$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
-        builtin cd -- "$cwd"
-    end
-    rm -f -- "$tmp"
-end
-
-function pacmanSync
-    pacman -Slq | fzf --multi --query "$argv" --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
-end
-
-function pacmanRemove
-    pacman -Qq | fzf --multi --query "$argv" --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns
-end
-
-function pacmanQuery
-    pacman -Qq | fzf --multi --query "$argv" --preview 'pacman -Qi {1}'
-end
-
-function paruSync
-    set keyword $argv
-
-    if test -z "$keyword"
-        read -P (set_color -o blue)"::"(set_color -o normal)" Search AUR: " keyword
-    end
-
-    if test -n "$keyword"
-        paru -Ssq "$keyword" | fzf --multi --preview 'paru -Si {1}' | xargs -ro paru -S
-    end
-end
-
 if status is-interactive # Commands to run in interactive sessions can go here
 
     # No greeting
     set fish_greeting
 
     # Use starship
-
     starship init fish | source
     if not set -q TMUX
         if test -f ~/.local/state/quickshell/user/generated/terminal/sequences.txt
