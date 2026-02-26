@@ -158,7 +158,7 @@ function others() {
   # Symlink qt6 config for root
   local QT6_ROOTDIR="/root/.config/qt6ct"
   sudo mkdir -p "$QT6_ROOTDIR"
-  sudo ln -fs "/home/$USER/.config/qt6ct" "$QT6_ROOTDIR"
+  sudo ln -sf "/home/$USER/.config/qt6ct" "$QT6_ROOTDIR"
 
   # First update cache for tealdeer
   if [[ ! -e "$HOME/.cache/tealdeer/tldr-pages/pages.en/" ]]; then
@@ -188,6 +188,7 @@ if ! confirm; then
 fi
 
 # Calling defined functions
+# TODO: Figure a way to delete all snapshots between the process
 changeSystemConfigs
 bulkInstall
 stowDotfiles
@@ -200,3 +201,5 @@ sudo snapper create -c root -c timeline -d "After install.sh"
 END=$SECONDS
 DURATION=$((END - START))
 echo -e "${YELLOW}Script ran for $DURATION seconds!${NOCOLOR}"
+
+echo -e "You may now reboot!"

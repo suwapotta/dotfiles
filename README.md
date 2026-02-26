@@ -627,7 +627,7 @@ cd && git clone https://github.com/suwapotta/dotfiles.git
 
 cd dotfiles
 # Edit (if needed)
-nvim install.sh
+nvim install.sh pacman/{aur,pkg}list.txt
 
 # Running the script
 chmod u+x install.sh
@@ -637,7 +637,10 @@ chmod u+x install.sh
 - **Post-script manual intervention**
   - **zen-browser-bin**: Go to `about:config` and set `toolkit.legacyUserProfileCustomizations.stylesheets`
     to `true`. And `yomitan` with Anki integration for auto card generator.
-  - **tmux**: Start a new session and press "CtrlB+R" then "I".
+    (Also add _@searchOptions_)
+  - **tmux**: Start a new session and press _"CtrlB+R"_ then _"I"_.
+  - **nvim**: Update all plugins + languages (mason).
+  - **firewalld**: Basic setup by following [Arch Wiki for firewalld](https://wiki.archlinux.org/title/Firewalld).
 
 ## Tips and Tricks
 
