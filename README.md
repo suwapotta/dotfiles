@@ -43,7 +43,6 @@
   - [Install script](#install-script)
   - [Tips and Tricks](#tips-and-tricks)
     - [Snapper Recovery](#snapper-recovery)
-    - [Pacman is currently in use](#pacman-is-currently-in-use)
   - [TODO](#todo)
   <!--toc:end-->
 
@@ -502,6 +501,11 @@ Install grub and its configuration into system:
 
 ```bash
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
+
+# Configure GRUB (optional)
+## Personally, I remove "quiet" option to see the process of systemd
+nvim /etc/default/grub
+
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
@@ -533,6 +537,8 @@ localectl status
 #   VC Keymap: en
 #   X11 Layout: (unset)
 ```
+
+<!-- ### Virtual machine scenario -->
 
 ### Network Manager
 
@@ -601,16 +607,13 @@ Basically, Arch is now ready for use. If so, congrats!
 
 ## ZRAM
 
-ZRAM is beneficial as it acts as modern SWAP but
+**ZRAM** is beneficial as it acts as modern SWAP but
 with _CPU tax_ for compressing and decompressing (can
 replace the traditional SWAP partition).
 
 ```bash
 sudo pacman -S zram-generator
-
-# Add only this line to use default configuration
-# [zram0]
-sudo nvim /etc/systemd/zram-generator.conf
+echo "[zram0]" >> /etc/systemd/zram-generator.conf
 ```
 
 ## Install script
@@ -663,23 +666,9 @@ btrfs subvolume snapshot /mnt/@snapshots/1/snapshot /mnt/@
 reboot
 ```
 
-### Pacman is currently in use
-
-This error can happens when there is a **lock file** is present at
-`/var/lib/pacman/db.lck`. Common situations that triggers usually
-are restoring from a backup, interrupted processes, etc.
-
-```fish
-# Quick fix
-sudo rm -f /var/lib/pacman/db.lck
-```
-
 ## TODO
 
-- **zen-browser-bin**
-  - **Anki** + **yomitan**
-- **MControlCenter** (MSI Laptop)
+- **MControlCenter** (MSI Laptop only)
 - **NVIDIA drivers** :(
-- **linux-zen**
 - **lazygit** setup
 - **QEMU** VMs + **tuned** service
