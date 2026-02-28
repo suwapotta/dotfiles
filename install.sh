@@ -170,23 +170,28 @@ function cleanUp() {
   local SEARCH_TERM1=$1
   local SEARCH_TERM2=$2
 
-  local SNAPPER_OUTPUT=$(snapper ls)
+  local SNAPPER_OUTPUT
+  SNAPPER_OUTPUT=$(snapper ls)
 
-  local TARGET1=$(echo "$SNAPPER_OUTPUT" | awk -v search="$SEARCH_TERM1" -F'│' 'NR>2 {
+  local TARGET1 TARGET2
+  TARGET1=$(echo "$SNAPPER_OUTPUT" | awk -v search="$SEARCH_TERM1" -F'│' 'NR>2 {
     num=$1;  gsub(/^[ \t]+|[ \t]+$/, "", num);
     desc=$7; gsub(/^[ \t]+|[ \t]+$/, "", desc);
     if(desc == search) { print num; exit }
   }')
 
-  local TARGET2=$(echo "$SNAPPER_OUTPUT" | awk -v search="$SEARCH_TERM2" -F'│' 'NR>2 {
+  TARGET2=$(echo "$SNAPPER_OUTPUT" | awk -v search="$SEARCH_TERM2" -F'│' 'NR>2 {
     num=$1;  gsub(/^[ \t]+|[ \t]+$/, "", num);
     desc=$7; gsub(/^[ \t]+|[ \t]+$/, "", desc);
     if(desc == search) { print num; exit }
   }')
 
+  # Nuke option in case of Before install.sh snapshot get cleanup
   if ! [[ "$TARGET1" =~ ^[0-9]+$ ]] || ! [[ "$TARGET2" =~ ^[0-9]+$ ]]; then
     echo "Error: Could not find exact matches for both '$SEARCH_TERM1' and '$SEARCH_TERM2'."
-    local TEMP=$(snapper ls | awk -F'│' 'NR>2 {
+
+    local TEMP
+    TEMP=$(snapper ls | awk -F'│' 'NR>2 {
     num=$1; gsub(/^[ \t]+|[ \t]+$/, "", num);
     if (num > 0) {
         print num;
@@ -237,6 +242,6 @@ cleanUp "Before install.sh" "After install.sh"
 # Return script runtime
 END=$SECONDS
 DURATION=$((END - START))
-echo -e "${YELLOW}Script ran for $DURATION seconds!${NOCOLOR}"
+echo -e "${BLUE}::${NOCOLOR} Script ran for ${YELLOW}$DURATION seconds!${NOCOLOR}"
 
-echo -e "You may now reboot!"
+echo -e "${GREEN}You may now reboot!${NOCOLOR}"
