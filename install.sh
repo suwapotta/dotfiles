@@ -166,6 +166,41 @@ function others() {
   fi
 }
 
+function cleanUp() {
+  local SEARCH_TERM1=$1
+  local SEARCH_TERM2=$2
+
+  local SNAPPER_OUTPUT=$(snapper ls)
+
+  local TARGET1=$(echo "$SNAPPER_OUTPUT" | awk -v search="$SEARCH_TERM1" -F'│' 'NR>2 {
+    num=$1;  gsub(/^[ \t]+|[ \t]+$/, "", num);
+    desc=$7; gsub(/^[ \t]+|[ \t]+$/, "", desc);
+    if(desc == search) { print num; exit }
+  }')
+
+  local TARGET2=$(echo "$SNAPPER_OUTPUT" | awk -v search="$SEARCH_TERM2" -F'│' 'NR>2 {
+    num=$1;  gsub(/^[ \t]+|[ \t]+$/, "", num);
+    desc=$7; gsub(/^[ \t]+|[ \t]+$/, "", desc);
+    if(desc == search) { print num; exit }
+  }')
+
+  if ! [[ "$TARGET1" =~ ^[0-9]+$ ]] || ! [[ "$TARGET2" =~ ^[0-9]+$ ]]; then
+    echo "Error: Could not find exact matches for both '$SEARCH_TERM1' and '$SEARCH_TERM2'."
+    local TEMP=$(snapper ls | awk -F'│' 'NR>2 {
+    num=$1; gsub(/^[ \t]+|[ \t]+$/, "", num);
+    if (num > 0) {
+        print num;
+        exit;
+    }
+  }')
+    sudo snapper delete "$TEMP"-$((TARGET2 - 1))
+
+    return 1
+  fi
+
+  sudo snapper delete $((TARGET1 + 1))-$((TARGET2 - 1))
+}
+
 ### MAIN PROGRAM
 # Exit whenever there is error
 set -euo pipefail
@@ -188,7 +223,6 @@ if ! confirm; then
 fi
 
 # Calling defined functions
-# TODO: Figure a way to delete all snapshots between the process
 changeSystemConfigs
 bulkInstall
 stowDotfiles
@@ -196,6 +230,9 @@ others
 
 # Finishing backup
 sudo snapper create -c root -c timeline -d "After install.sh"
+
+# Delete all auto snapshots in process
+cleanUp "Before install.sh" "After install.sh"
 
 # Return script runtime
 END=$SECONDS
