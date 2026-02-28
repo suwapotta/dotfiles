@@ -49,7 +49,7 @@
 ## Notes
 
 This guide is intended for _my personal use_,
-use with your own risk, the script may be unstable (currently).
+use with your own risk, the script may be unstable (sadly).
 The **main focus** of this guide is to have an Arch setup that
 uses _snapper_ as an alternative to _timeshift_,
 and also to setup new machine as fast as possible.
@@ -96,7 +96,7 @@ cp ~/Downloads/iso/archlinux-2026.02.01-x86_64.iso /run/media/suwapotta/Ventoy/
 
 ### Set keyboard layout
 
-> [!NOTE]
+> [!TIP]
 > Before starting, may want to enable vim mode in `zsh` shell:
 >
 > ```zsh
@@ -360,7 +360,7 @@ pacman -Syyy
 ### Package Installation
 
 ```zsh
-# "base linux-firmware" REQUIRED
+# "base linux-firmware" REQUIRED with at least 1 kernel
 # "linux" stable kernel
 # "linux-zen" performance-focused kernel
 # "linux-lts" long term support kernel (backup kernel)
@@ -372,7 +372,7 @@ pacman -Syyy
 # "bluez bluez-utils" bluetooth
 # "intel-ucode" microcode updates for intel cpu (amd-ucode for AMD CPU)
 # "networkmanager" manage internet connection for both wire and wireless connection
-# "reflector" manages mirrorlist
+# "reflector" auto manages mirrorlist
 # "btrfs-progs" file system management
 # "efibootmgr" required for grub
 # "grub" powerful bootloader
@@ -403,10 +403,11 @@ cat /mnt/etc/fstab
 arch-chroot /mnt
 ```
 
-> [!NOTE]
+> [!TIP]
 > Before continuing, may want to enable vim mode in `bash` shell:
 >
 > ```bash
+> # TBH, it sucks
 > set -o vi
 > ```
 
@@ -616,10 +617,12 @@ sudo pacman -S zram-generator
 echo "[zram0]" >> /etc/systemd/zram-generator.conf
 ```
 
+Reboot to take effect.
+
 ## Install script
 
 From now on, everything will be taken care by
-`install.sh` script (may want to disable something for VM):
+`install.sh` script (may want to disable/remove something for VM):
 
 ```bash
 # Cloning repo

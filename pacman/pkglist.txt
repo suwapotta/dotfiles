@@ -54,4 +54,3 @@ texlive-langother
 libxcrypt-compat
 libnotify
 firewalld
-vulkan-headers

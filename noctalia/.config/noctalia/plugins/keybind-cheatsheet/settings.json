@@ -4,10 +4,6 @@
       "title": "Applications",
       "binds": [
         {
-          "keys": "Super + Slash",
-          "desc": "Keybind Cheatsheet"
-        },
-        {
           "keys": "Super + Return",
           "desc": "Open Terminal"
         },
@@ -34,6 +30,10 @@
         {
           "keys": "Ctrl + Shift + Escape",
           "desc": "Open btop++"
+        },
+        {
+          "keys": "Super + Slash",
+          "desc": "Keybind Cheatsheet"
         },
         {
           "keys": "Alt + Space",
@@ -261,38 +261,6 @@
           "desc": "Move Column To Last"
         },
         {
-          "keys": "Super + Shift + Ctrl + Left",
-          "desc": "Move Column To Monitor Left"
-        },
-        {
-          "keys": "Super + Shift + Ctrl + Down",
-          "desc": "Move Column To Monitor Down"
-        },
-        {
-          "keys": "Super + Shift + Ctrl + Up",
-          "desc": "Move Column To Monitor Up"
-        },
-        {
-          "keys": "Super + Shift + Ctrl + Right",
-          "desc": "Move Column To Monitor Right"
-        },
-        {
-          "keys": "Super + Shift + Ctrl + H",
-          "desc": "Move Column To Monitor Left"
-        },
-        {
-          "keys": "Super + Shift + Ctrl + J",
-          "desc": "Move Column To Monitor Down"
-        },
-        {
-          "keys": "Super + Shift + Ctrl + K",
-          "desc": "Move Column To Monitor Up"
-        },
-        {
-          "keys": "Super + Shift + Ctrl + L",
-          "desc": "Move Column To Monitor Right"
-        },
-        {
           "keys": "Super + Shift + Page_Down",
           "desc": "Move Column To Workspace Down"
         },
@@ -486,10 +454,6 @@
         {
           "keys": "Super + C",
           "desc": "Center Column"
-        },
-        {
-          "keys": "Super + Shift + C",
-          "desc": "Center Visible Columns"
         },
         {
           "keys": "Super + Shift + Minus",
