@@ -420,7 +420,7 @@ timedatectl list-timezones
 # Or more user-friendly version :)
 tzselect
 
-# Add a symlink to local time
+# Add a symlink to local time. E.g.,
 ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 
 # Now sync the system time to hardware clock
@@ -634,8 +634,7 @@ cd dotfiles
 nvim install.sh pacman/{aur,pkg}list.txt
 
 # Running the script
-chmod u+x install.sh
-./install.sh
+bash install.sh
 ```
 
 - **Post-script manual intervention**

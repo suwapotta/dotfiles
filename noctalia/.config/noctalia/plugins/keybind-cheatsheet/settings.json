@@ -64,6 +64,22 @@
           "desc": "System Monitor"
         },
         {
+          "keys": "Super + P",
+          "desc": "Play/Pause media"
+        },
+        {
+          "keys": "Super + Shift + P",
+          "desc": "Play/Pause media"
+        },
+        {
+          "keys": "Super + Shift + N",
+          "desc": "Next media"
+        },
+        {
+          "keys": "Super + Shift + B",
+          "desc": "Previous media"
+        },
+        {
           "keys": "Super + Shift + Alt + W",
           "desc": "Set Wallpaper"
         },
@@ -94,12 +110,40 @@
         {
           "keys": "Super + Alt + Space",
           "desc": "Window Switcher access"
+        },
+        {
+          "keys": "Vol Up",
+          "desc": "Run: qs -c noctalia-shell ipc call volume increase"
+        },
+        {
+          "keys": "Vol Down",
+          "desc": "Run: qs -c noctalia-shell ipc call volume decrease"
+        },
+        {
+          "keys": "Mute",
+          "desc": "Run: qs -c noctalia-shell ipc call volume muteOutput"
+        },
+        {
+          "keys": "Mic Mute",
+          "desc": "Run: qs -c noctalia-shell ipc call volume muteInput"
+        },
+        {
+          "keys": "Bright Up",
+          "desc": "Run: qs -c noctalia-shell ipc call brightness increase"
+        },
+        {
+          "keys": "Bright Down",
+          "desc": "Run: qs -c noctalia-shell ipc call brightness decrease"
         }
       ]
     },
     {
       "title": "Window Management",
       "binds": [
+        {
+          "keys": "Super + Q",
+          "desc": "Close Window"
+        },
         {
           "keys": "Super + Comma",
           "desc": "Consume Window Into Column"
@@ -184,6 +228,14 @@
       "title": "Workspace Navigation",
       "binds": [
         {
+          "keys": "Super + MouseBack",
+          "desc": "Focus Workspace Down"
+        },
+        {
+          "keys": "Super + MouseForward",
+          "desc": "Focus Workspace Up"
+        },
+        {
           "keys": "Super + Page_Down",
           "desc": "Focus Workspace Down"
         },
@@ -197,6 +249,14 @@
         },
         {
           "keys": "Super + I",
+          "desc": "Focus Workspace Up"
+        },
+        {
+          "keys": "Super + WheelScrollDown",
+          "desc": "Focus Workspace Down"
+        },
+        {
+          "keys": "Super + WheelScrollUp",
           "desc": "Focus Workspace Up"
         },
         {
@@ -278,6 +338,14 @@
         },
         {
           "keys": "Super + Shift + I",
+          "desc": "Move Column To Workspace Up"
+        },
+        {
+          "keys": "Super + Ctrl + WheelScrollDown",
+          "desc": "Move Column To Workspace Down"
+        },
+        {
+          "keys": "Super + Ctrl + WheelScrollUp",
           "desc": "Move Column To Workspace Up"
         },
         {
@@ -368,6 +436,14 @@
       "title": "Column Width",
       "binds": [
         {
+          "keys": "Super + D",
+          "desc": "Switch Preset Column Width"
+        },
+        {
+          "keys": "Super + R",
+          "desc": "Switch Preset Column Width Back"
+        },
+        {
           "keys": "Super + Minus",
           "desc": "Set Column Width \" 10%\""
         },
@@ -407,6 +483,10 @@
     {
       "title": "Other",
       "binds": [
+        {
+          "keys": "Super + O",
+          "desc": "Toggle Overview"
+        },
         {
           "keys": "Super + Ctrl + Left",
           "desc": "Focus Monitor Left"

@@ -33,9 +33,9 @@ function drawProgressBar() {
 
   # Symbols
   local BAR_LENGTH=34
-  local FINISHED_SYMB="#"
-  local UNFINISHED_SYMB="-"
-  local COLONS="::"
+  local FINISHED_SYMB='#'
+  local UNFINISHED_SYMB='-'
+  local COLONS='::'
 
   # Calculations
   local TASKS="($CURRENT/$TOTAL)"
@@ -66,9 +66,9 @@ function drawProgressBar() {
   # Put things together
   tput sc
   tput cup "$TERM_LINES" "$TERM_BOTLEFT"
-  tput el # Clear bottom line
+  tput el # Clear bottom line (avoid message overlapping)
   echo -en "${BLUE}$COLONS${NORMAL} $TASKS $MESSAGE"
-  tput cup "$TERM_LINES" $TERM_BOTRIGHT
+  tput cup "$TERM_LINES" "$TERM_BOTRIGHT"
   echo -en "$PROGRESS_BAR ${PERCENTAGE_COLOR}$PERCENTAGE%${NORMAL}"
   tput rc
 }
