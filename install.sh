@@ -21,6 +21,7 @@ TERM_COLUMNS=$(tput cols)
 
 ### Helper functions
 function setScrollingZone() {
+  echo "Running script..."
   tput csr 0 $((TERM_LINES - 2))
   clear
 }
@@ -279,16 +280,16 @@ if ! confirm; then
 fi
 
 # Calling defined functions
-drawProgressBar 1 5 "Changing system configurations..." && changeSystemConfigs
-drawProgressBar 2 5 "Installing packages + AURs..." && bulkInstall
-drawProgressBar 3 5 "Stowing dotfiles..." && stowDotfiles
-odrawProgressBar 4 5 "Tweaking..." && others
+drawProgressBar 0 4 "Changing system configurations..." && changeSystemConfigs
+drawProgressBar 1 4 "Installing packages + AURs..." && bulkInstall
+drawProgressBar 2 4 "Stowing dotfiles..." && stowDotfiles
+odrawProgressBar 3 4 "Tweaking..." && others
 
 # Finishing backup
 sudo snapper create -c root -c timeline -d "After install.sh"
 
 # Delete all auto snapshots in process
-drawProgressBar 5 5 "Cleaning snapshots..." && cleanUp "Before install.sh" "After install.sh"
+drawProgressBar 4 4 "Cleaning snapshots..." && cleanUp "Before install.sh" "After install.sh"
 if [[ $? -eq 1 ]]; then
   echo "${BLUE}::${NORMAL} Does ${RED}nuke snapshots${NORMAL}."
   echo
