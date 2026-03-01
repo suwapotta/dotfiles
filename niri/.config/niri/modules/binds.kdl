@@ -145,7 +145,7 @@ binds {
     Mod+M hotkey-overlay-title="Control Center" { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
     Mod+Shift+M hotkey-overlay-title="Settings" { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
     Mod+V hotkey-overlay-title="Clipboard History" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
-    Mod+Alt+C hotkey-overlay-title="Calender" { spawn-sh "qs -c noctalia-shell ipc call calendar toggle"; }
+    Mod+Shift+C hotkey-overlay-title="Calender" { spawn-sh "qs -c noctalia-shell ipc call calendar toggle"; }
     Mod+Delete hotkey-overlay-title="Session Menu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
     Mod+Alt+Down hotkey-overlay-title="System Monitor" { spawn-sh "qs -c noctalia-shell ipc call systemMonitor toggle"; }
     Mod+P allow-when-locked=true hotkey-overlay-title="Play/Pause media" { spawn-sh "qs -c noctalia-shell ipc call media toggle"; }
@@ -159,6 +159,7 @@ binds {
     Mod+Alt+Up hotkey-overlay-title="Toggle Bar Visibilty" { spawn-sh "qs -c noctalia-shell ipc call bar toggle"; }
     Mod+Alt+T hotkey-overlay-title="Toggle DND" { spawn-sh "qs -c noctalia-shell ipc call notifications toggleDND"; }
     Mod+Insert hotkey-overlay-title="Cycle power profiles" { spawn-sh "qs -c noctalia-shell ipc call powerProfile cycle"; }
+    Mod+Alt+Space hotkey-overlay-title="Window Switcher access" { spawn-sh "qs -c noctalia-shell ipc call launcher windows"; }
     XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
     XF86AudioLowerVolume  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease"; }
     XF86AudioMute         allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteOutput"; }

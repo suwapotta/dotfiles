@@ -3,6 +3,7 @@ return {
   opts = {
     ensure_installed = {
       "arduino-language-server",
+      "bash-debug-adapter",
       "bash-language-server",
       "bibtex-tidy",
       "clang-format",

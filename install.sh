@@ -99,7 +99,7 @@ function bulkInstall() {
   local PKGAUR_DIR="$DOTFILES_DIR/pacman"
 
   # Offical packages
-  cat "$PKGAUR_DIR/pkglist.txt" | sudo SNAP_PAC_SKIP=y pacman -S --needed --noconfirm -
+  cat "$PKGAUR_DIR/pkglist.txt" | sudo SNAP_PAC_SKIP=y pacman -Syu --needed --noconfirm -
 
   # AURs
   # NOTE: Can't skip snap-pac here using paru
@@ -171,9 +171,8 @@ function cleanUp() {
   local SEARCH_TERM2=$2
 
   local SNAPPER_OUTPUT
-  SNAPPER_OUTPUT=$(snapper ls)
-
   local TARGET1 TARGET2
+  SNAPPER_OUTPUT=$(snapper ls)
   TARGET1=$(echo "$SNAPPER_OUTPUT" | awk -v search="$SEARCH_TERM1" -F'│' 'NR>2 {
     num=$1;  gsub(/^[ \t]+|[ \t]+$/, "", num);
     desc=$7; gsub(/^[ \t]+|[ \t]+$/, "", desc);
@@ -198,12 +197,13 @@ function cleanUp() {
         exit;
     }
   }')
+    # Remove all snaphots in between
     sudo snapper delete "$TEMP"-$((TARGET2 - 1))
 
     return 1
   fi
 
-  sudo snapper delete $((TARGET1 + 1))-$((TARGET2 - 1))
+  sudo snapper delete $((TARGET1 + 1))-$((TARGET2 - 1)) && return 0
 }
 
 ### MAIN PROGRAM
@@ -238,6 +238,10 @@ sudo snapper create -c root -c timeline -d "After install.sh"
 
 # Delete all auto snapshots in process
 cleanUp "Before install.sh" "After install.sh"
+if [[ $? -eq 1 ]]; then
+  echo "${BLUE}::${NOCOLOR} Does ${RED}nuke snapshots${NOCOLOR}."
+  echo
+fi
 
 # Return script runtime
 END=$SECONDS

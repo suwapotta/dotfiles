@@ -52,7 +52,7 @@
           "desc": "Clipboard History"
         },
         {
-          "keys": "Super + Alt + C",
+          "keys": "Super + Shift + C",
           "desc": "Calender"
         },
         {
@@ -90,6 +90,10 @@
         {
           "keys": "Super + Insert",
           "desc": "Cycle power profiles"
+        },
+        {
+          "keys": "Super + Alt + Space",
+          "desc": "Window Switcher access"
         }
       ]
     },

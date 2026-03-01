@@ -25,6 +25,8 @@ return {
         "typst",
         "vue",
         "kdl",
+        "markdown",
+        "markdown_inline",
       }
 
       if type(opts.highlight) == "table" and type(opts.highlight.disable) == "table" then

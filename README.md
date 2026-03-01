@@ -81,7 +81,7 @@ pacman-key -v archlinux-version-x86_64.iso.sig
 
 ### Boot into live environment
 
-> [!NOTE]
+> [!WARNING]
 > Remember to disable secure boot option in BIOS.
 
 Copy/move the `iso` file into USB (Ventoy) and enter the live environment.
@@ -504,7 +504,8 @@ Install grub and its configuration into system:
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
 
 # Configure GRUB (optional)
-## Personally, I remove "quiet" option to see the process of systemd
+## Personally, I remove "quiet" option to see the boot process of systemd
+## And disable submenus in boot menu
 nvim /etc/default/grub
 
 grub-mkconfig -o /boot/grub/grub.cfg
