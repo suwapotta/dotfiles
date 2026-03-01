@@ -642,7 +642,6 @@ chmod u+x install.sh
   - **zen-browser-bin**: Go to `about:config` and set `toolkit.legacyUserProfileCustomizations.stylesheets`
     to `true`. And `yomitan` with Anki integration for auto card generator.
     (Also add _@searchOptions_)
-  - **tmux**: Start a new session and press _"CtrlB+R"_ then _"I"_.
   - **nvim**: Update all plugins + languages (mason).
   - **firewalld**: Basic setup by following [Arch Wiki for firewalld](https://wiki.archlinux.org/title/Firewalld).
 

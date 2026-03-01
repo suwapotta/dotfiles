@@ -10,6 +10,7 @@ RED="\e[0;31m"
 GREEN="\e[0;32m"
 YELLOW="\e[0;33m"
 BLUE="\e[0;34m"
+ITALIC="\e[0;3m"
 NORMAL="\e[0m"
 
 # Global variables
@@ -21,26 +22,31 @@ TERM_COLUMNS=$(tput cols)
 
 ### Helper functions
 function setScrollingZone() {
-  echo "Running script..."
   tput csr 0 $((TERM_LINES - 2))
   clear
 }
 
 function drawProgressBar() {
+  # Inputs
   local CURRENT=$1
   local TOTAL=$2
   local MESSAGE=$3
+
+  # Symbols
+  local BAR_LENGTH=34
   local FINISHED_SYMB="#"
   local UNFINISHED_SYMB="-"
-  local BAR_LENGTH=34
-
   local COLONS="::"
+
+  # Calculations
   local TASKS="($CURRENT/$TOTAL)"
+  ((CURRENT--)) # Fix weird percentage number
   local PERCENTAGE="$((CURRENT * 100 / TOTAL))"
   local NUMB_BAR="$((PERCENTAGE * BAR_LENGTH / 100))"
   local TERM_BOTLEFT=0
   local TERM_BOTRIGHT=$((TERM_COLUMNS - ${#PERCENTAGE} - BAR_LENGTH - 5))
 
+  # Constructing progress bar
   local PROGRESS_BAR='['
   for ((i = 0; i < NUMB_BAR; i++)); do
     PROGRESS_BAR+="$FINISHED_SYMB"
@@ -50,17 +56,19 @@ function drawProgressBar() {
   done
   PROGRESS_BAR+=']'
 
+  # Adjust color according to percentage
   if [[ PERCENTAGE -le 33 ]]; then
     local PERCENTAGE_COLOR=$RED
   elif [[ PERCENTAGE -lt 67 ]]; then
     local PERCENTAGE_COLOR=$YELLOW
-  elif [[ PERCENTAGE -gt 67 ]]; then
+  elif [[ PERCENTAGE -le 100 ]]; then
     local PERCENTAGE_COLOR=$GREEN
   fi
 
+  # Put things together
   tput sc
   tput cup "$TERM_LINES" "$TERM_BOTLEFT"
-  echo -en "\r${BLUE}$COLONS${NORMAL} $TASKS ${URED} $MESSAGE ${NORMAL}"
+  echo -en "${BLUE}$COLONS${NORMAL} $TASKS ${URED} $MESSAGE ${NORMAL}"
   tput cup "$TERM_LINES" $TERM_BOTRIGHT
   echo -en "$PROGRESS_BAR ${PERCENTAGE_COLOR}$PERCENTAGE%${NORMAL}"
   tput rc
@@ -88,6 +96,7 @@ function countdown() {
 }
 
 function confirm() {
+  echo -e "${ITALIC}Running script...${NORMAL}"
   echo -en "${URED}Do you wish to continue?${NORMAL} [Y/n] "
   read -r CONFIRMATION
 
@@ -193,10 +202,11 @@ function others() {
   # Install fish's plugins
   fish -c "fisher update"
 
-  # Install tmux's plugin mangager (tpm)
+  # Install tmux's plugin mangager (tpm) + Plugins
   if [[ ! -e "$HOME/.tmux/plugins/tpm" ]]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   fi
+  bash "$HOME/.tmux/plugins/tpm/bin/install_plugins"
 
   # Start-up login screen
   sudo systemctl enable sddm.service
@@ -280,20 +290,21 @@ if ! confirm; then
 fi
 
 # Calling defined functions
-drawProgressBar 0 4 "Changing system configurations..." && changeSystemConfigs
-drawProgressBar 1 4 "Installing packages + AURs..." && bulkInstall
-drawProgressBar 2 4 "Stowing dotfiles..." && stowDotfiles
-odrawProgressBar 3 4 "Tweaking..." && others
+drawProgressBar 1 5 "Changing system configurations..." && changeSystemConfigs
+drawProgressBar 2 5 "Installing packages + AURs..." && bulkInstall
+drawProgressBar 3 5 "Stowing dotfiles..." && stowDotfiles
+drawProgressBar 4 5 "Tweaking..." && others
 
 # Finishing backup
 sudo snapper create -c root -c timeline -d "After install.sh"
 
 # Delete all auto snapshots in process
-drawProgressBar 4 4 "Cleaning snapshots..." && cleanUp "Before install.sh" "After install.sh"
+drawProgressBar 5 5 "Cleaning snapshots..." && cleanUp "Before install.sh" "After install.sh"
 if [[ $? -eq 1 ]]; then
   echo "${BLUE}::${NORMAL} Does ${RED}nuke snapshots${NORMAL}."
   echo
 fi
+drawProgressBar 6 5 "${GREEN}Completed..."
 
 # Return script runtime
 END=$SECONDS
