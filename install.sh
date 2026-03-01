@@ -10,13 +10,61 @@ RED="\e[0;31m"
 GREEN="\e[0;32m"
 YELLOW="\e[0;33m"
 BLUE="\e[0;34m"
-NOCOLOR="\e[0m"
+NORMAL="\e[0m"
 
 # Global variables
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR="$HOME/.config"
 
+TERM_LINES=$(tput lines)
+TERM_COLUMNS=$(tput cols)
+
 ### Helper functions
+function setScrollingZone() {
+  tput csr 0 $((TERM_LINES - 2))
+  clear
+}
+
+function drawProgressBar() {
+  local CURRENT=$1
+  local TOTAL=$2
+  local MESSAGE=$3
+  local FINISHED_SYMB="#"
+  local UNFINISHED_SYMB="-"
+  local BAR_LENGTH=34
+
+  local COLONS="::"
+  local TASKS="($CURRENT/$TOTAL)"
+  local PERCENTAGE="$((CURRENT * 100 / TOTAL))"
+  local NUMB_BAR="$((PERCENTAGE * BAR_LENGTH / 100))"
+  local TERM_BOTLEFT=0
+  local TERM_BOTRIGHT=$((TERM_COLUMNS - ${#PERCENTAGE} - BAR_LENGTH - 5))
+
+  local PROGRESS_BAR='['
+  for ((i = 0; i < NUMB_BAR; i++)); do
+    PROGRESS_BAR+="$FINISHED_SYMB"
+  done
+  for ((j = NUMB_BAR; j < BAR_LENGTH; j++)); do
+    PROGRESS_BAR+="$UNFINISHED_SYMB"
+  done
+  PROGRESS_BAR+=']'
+
+  if [[ PERCENTAGE -le 33 ]]; then
+    local PERCENTAGE_COLOR=$RED
+  elif [[ PERCENTAGE -lt 67 ]]; then
+    local PERCENTAGE_COLOR=$YELLOW
+  elif [[ PERCENTAGE -gt 67 ]]; then
+    local PERCENTAGE_COLOR=$GREEN
+  fi
+
+  tput sc
+  tput cup "$TERM_LINES" "$TERM_BOTLEFT"
+  echo -en "\r${BLUE}$COLONS${NORMAL} $TASKS ${URED} $MESSAGE ${NORMAL}"
+  tput cup "$TERM_LINES" $TERM_BOTRIGHT
+  echo -en "$PROGRESS_BAR ${PERCENTAGE_COLOR}$PERCENTAGE%${NORMAL}"
+  tput rc
+}
+
 function countdown() {
   for i in {3..1}; do
     case "$i" in
@@ -31,7 +79,7 @@ function countdown() {
       ;;
     esac
 
-    printf "\r${BLUE}::${NOCOLOR} Starting in ${CURRENT_COLOR}%d${NOCOLOR}..." "$i"
+    printf "\r${BLUE}::${NORMAL} Starting in ${CURRENT_COLOR}%d${NORMAL}..." "$i"
     sleep 1
   done
 
@@ -39,7 +87,7 @@ function countdown() {
 }
 
 function confirm() {
-  echo -en "${URED}Do you wish to continue?${NOCOLOR} [Y/n] "
+  echo -en "${URED}Do you wish to continue?${NORMAL} [Y/n] "
   read -r CONFIRMATION
 
   case "$CONFIRMATION" in
@@ -48,7 +96,7 @@ function confirm() {
     return 0
     ;;
   *)
-    echo "${RED}Aborting...${NOCOLOR}"
+    echo "${RED}Aborting...${NORMAL}"
     return 1
     ;;
   esac
@@ -108,7 +156,7 @@ function bulkInstall() {
 
 function stowDotfiles() {
   if ! stow --version &>/dev/null; then
-    echo "${RED}ERROR${NOCOLOR}: ${BLUE}stow${NOCOLOR} not available!"
+    echo "${RED}ERROR${NORMAL}: ${BLUE}stow${NORMAL} not available!"
     return 1
   fi
 
@@ -207,6 +255,9 @@ function cleanUp() {
 }
 
 ### MAIN PROGRAM
+# Preparation
+setScrollingZone
+
 # Exit whenever there is error
 set -euo pipefail
 
@@ -228,24 +279,24 @@ if ! confirm; then
 fi
 
 # Calling defined functions
-changeSystemConfigs
-bulkInstall
-stowDotfiles
-others
+drawProgressBar 1 5 "Changing system configurations..." && changeSystemConfigs
+drawProgressBar 2 5 "Installing packages + AURs..." && bulkInstall
+drawProgressBar 3 5 "Stowing dotfiles..." && stowDotfiles
+odrawProgressBar 4 5 "Tweaking..." && others
 
 # Finishing backup
 sudo snapper create -c root -c timeline -d "After install.sh"
 
 # Delete all auto snapshots in process
-cleanUp "Before install.sh" "After install.sh"
+drawProgressBar 5 5 "Cleaning snapshots..." && cleanUp "Before install.sh" "After install.sh"
 if [[ $? -eq 1 ]]; then
-  echo "${BLUE}::${NOCOLOR} Does ${RED}nuke snapshots${NOCOLOR}."
+  echo "${BLUE}::${NORMAL} Does ${RED}nuke snapshots${NORMAL}."
   echo
 fi
 
 # Return script runtime
 END=$SECONDS
 DURATION=$((END - START))
-echo -e "${BLUE}::${NOCOLOR} Script ran for ${YELLOW}$DURATION seconds!${NOCOLOR}"
+echo -e "${BLUE}::${NORMAL} Script ran for ${YELLOW}$DURATION seconds!${NORMAL}"
 
-echo -e "${GREEN}You may now reboot!${NOCOLOR}"
+echo -e "${GREEN}You may now reboot!${NORMAL}"
