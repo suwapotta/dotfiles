@@ -10,7 +10,6 @@ RED="\e[0;31m"
 GREEN="\e[0;32m"
 YELLOW="\e[0;33m"
 BLUE="\e[0;34m"
-ITALIC="\e[0;3m"
 NORMAL="\e[0m"
 
 # Global variables
@@ -40,8 +39,7 @@ function drawProgressBar() {
 
   # Calculations
   local TASKS="($CURRENT/$TOTAL)"
-  ((CURRENT--)) # Fix weird percentage number
-  local PERCENTAGE="$((CURRENT * 100 / TOTAL))"
+  local PERCENTAGE="$(((CURRENT - 1) * 100 / TOTAL))"
   local NUMB_BAR="$((PERCENTAGE * BAR_LENGTH / 100))"
   local TERM_BOTLEFT=0
   local TERM_BOTRIGHT=$((TERM_COLUMNS - ${#PERCENTAGE} - BAR_LENGTH - 5))
@@ -68,7 +66,8 @@ function drawProgressBar() {
   # Put things together
   tput sc
   tput cup "$TERM_LINES" "$TERM_BOTLEFT"
-  echo -en "${BLUE}$COLONS${NORMAL} $TASKS ${URED} $MESSAGE ${NORMAL}"
+  tput el # Clear bottom line
+  echo -en "${BLUE}$COLONS${NORMAL} $TASKS $MESSAGE"
   tput cup "$TERM_LINES" $TERM_BOTRIGHT
   echo -en "$PROGRESS_BAR ${PERCENTAGE_COLOR}$PERCENTAGE%${NORMAL}"
   tput rc
@@ -96,7 +95,6 @@ function countdown() {
 }
 
 function confirm() {
-  echo -e "${ITALIC}Running script...${NORMAL}"
   echo -en "${URED}Do you wish to continue?${NORMAL} [Y/n] "
   read -r CONFIRMATION
 
@@ -156,7 +154,7 @@ function changeSystemConfigs() {
 function bulkInstall() {
   local PKGAUR_DIR="$DOTFILES_DIR/pacman"
 
-  # Offical packages
+  # Official packages
   cat "$PKGAUR_DIR/pkglist.txt" | sudo SNAP_PAC_SKIP=y pacman -Syu --needed --noconfirm -
 
   # AURs
@@ -291,7 +289,7 @@ fi
 
 # Calling defined functions
 drawProgressBar 1 5 "Changing system configurations..." && changeSystemConfigs
-drawProgressBar 2 5 "Installing packages + AURs..." && bulkInstall
+drawProgressBar 2 5 "Installing official packages + AURs..." && bulkInstall
 drawProgressBar 3 5 "Stowing dotfiles..." && stowDotfiles
 drawProgressBar 4 5 "Tweaking..." && others
 
@@ -304,7 +302,7 @@ if [[ $? -eq 1 ]]; then
   echo "${BLUE}::${NORMAL} Does ${RED}nuke snapshots${NORMAL}."
   echo
 fi
-drawProgressBar 6 5 "${GREEN}Completed..."
+drawProgressBar 5 5 "${GREEN}Completed..."
 
 # Return script runtime
 END=$SECONDS

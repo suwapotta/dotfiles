@@ -663,13 +663,23 @@ Moreover, this allows us to restore a snapper snapshot even if the system is **_
 Start with booting into an **Arch live environment**, and execute the following:
 
 ```bash
-mount /dev/nvme0n1p3 /mnt
+### Example:
+# NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+# zram0       253:0    0     4G  0 disk [SWAP]
+# nvme0n1     259:0    0 476.9G  0 disk
+# ├─nvme0n1p1 259:1    0     1G  0 part /efi
+# ├─nvme0n1p2 259:2    0     4G  0 part [SWAP]
+# └─nvme0n1p3 259:3    0 471.9G  0 part /var/log
+#                                       /home
+#                                       /.snapshots
+#                                       /btrfsroot
+/mount /dev/nvme0n1p3 /mnt
 vim /mnt/@snapshots/*/info.xml
 # ":bn" and ":bp" to navigate between buffers
 
 rm -rf /mnt/@
-# Replace 1 with desired snapshot
-btrfs subvolume snapshot /mnt/@snapshots/1/snapshot /mnt/@
+# Replace 999 with desired snapshot
+btrfs subvolume snapshot /mnt/@snapshots/999/snapshot /mnt/@
 reboot
 ```
 
