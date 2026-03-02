@@ -10,6 +10,7 @@ RED="\e[0;31m"
 GREEN="\e[0;32m"
 YELLOW="\e[0;33m"
 BLUE="\e[0;34m"
+ITALIC="\e[0;3m"
 NORMAL="\e[0m"
 
 # Global variables
@@ -288,10 +289,10 @@ if ! confirm; then
 fi
 
 # Calling defined functions
-drawProgressBar 1 5 "Changing system configurations..." && changeSystemConfigs
-drawProgressBar 2 5 "Installing official packages + AURs..." && bulkInstall
-drawProgressBar 3 5 "Stowing dotfiles..." && stowDotfiles
-drawProgressBar 4 5 "Tweaking..." && others
+drawProgressBar 1 5 "${ITALIC}Changing system configurations...${NORMAL}" && changeSystemConfigs
+drawProgressBar 2 5 "${ITALIC}Installing official packages + AURs...${NORMAL}" && bulkInstall
+drawProgressBar 3 5 "${ITALIC}Stowing dotfiles...${NORMAL}" && stowDotfiles
+drawProgressBar 4 5 "${ITALIC}Tweaking...${NORMAL}" && others
 
 # Finishing backup
 sudo snapper create -c root -c timeline -d "After install.sh"
@@ -302,7 +303,7 @@ if [[ $? -eq 1 ]]; then
   echo "${BLUE}::${NORMAL} Does ${RED}nuke snapshots${NORMAL}."
   echo
 fi
-drawProgressBar 5 5 "${GREEN}Completed..."
+drawProgressBar 5 5 "${GREEN}Completed...${NORMAL}"
 
 # Return script runtime
 END=$SECONDS
