@@ -26,3 +26,11 @@ window-rule {
         urgent-color   "#f38ba9"
     }
 }
+window-rule {
+    match title="^nvim-command"
+    border {
+        active-color   "#fab388"
+        inactive-color "#1e1e2e"
+        urgent-color   "#f38ba9"
+    }
+}
