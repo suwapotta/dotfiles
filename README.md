@@ -672,6 +672,7 @@ Start with booting into an **Arch live environment**, and execute the following:
 #                                       /home
 #                                       /.snapshots
 #                                       /btrfsroot
+#                                       /
 /mount /dev/nvme0n1p3 /mnt
 vim /mnt/@snapshots/*/info.xml
 # ":bn" and ":bp" to navigate between buffers

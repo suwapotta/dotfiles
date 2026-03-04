@@ -99,7 +99,7 @@ format = '[](bold fg:green)[󰉋 $path]($style)[](bold fg:green)'
 "Pictures" = "  "
 "Videos" = "  "
 "GitHub" = " 󰊤 "
-"dotfiles" = "  "
+"arch-dotfiles" = "  "
 
 [cmd_duration]
 min_time = 0
