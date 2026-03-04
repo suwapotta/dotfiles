@@ -130,7 +130,7 @@ function changeSystemConfigs() {
 
   # Safety check for first time installing
   if [[ ! -d "$REFLECTOR_DIR" ]]; then
-    sudo mkdir -p "$REFLECTOR_DIR"
+    sudo mkdir -pv "$REFLECTOR_DIR"
   fi
 
   # Backup
@@ -215,8 +215,9 @@ function others() {
 
   # Symlink qt6 config for root
   local QT6_ROOTDIR="/root/.config/qt6ct"
-  sudo mkdir -p "$QT6_ROOTDIR"
-  sudo ln -sf "/home/$USER/.config/qt6ct" "$QT6_ROOTDIR"
+  if [[ ! -L "$QT6_ROOTDIR" ]]; then
+    sudo ln -sf "$HOME/.config/qt6ct" "$QT6_ROOTDIR"
+  fi
 
   # First update cache for tealdeer
   if [[ ! -e "$HOME/.cache/tealdeer/tldr-pages/pages.en/" ]]; then

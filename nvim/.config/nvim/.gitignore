@@ -1,8 +1,2 @@
-tt.*
-.tests
-doc/tags
-debug
-.repro
-foo.*
-*.log
-data
+fcitx5/.config/fcitx5/profile
+noctalia/.config/noctalia/plugins/todo/settings.jsontt.*
