@@ -18,6 +18,7 @@ include "modules/window-rules.kdl"
 include "modules/layer-rules.kdl"
 include "modules/animations.kdl"
 include "modules/debug.kdl"
+include "modules/nvim-modes.kdl"
 
 /*
 *                        __        ___                  __         ____
