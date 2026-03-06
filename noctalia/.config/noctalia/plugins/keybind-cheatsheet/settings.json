@@ -113,27 +113,27 @@
         },
         {
           "keys": "Vol Up",
-          "desc": "Run: qs -c noctalia-shell ipc call volume increase"
+          "desc": "Increase volume"
         },
         {
           "keys": "Vol Down",
-          "desc": "Run: qs -c noctalia-shell ipc call volume decrease"
+          "desc": "Decrease volume"
         },
         {
           "keys": "Mute",
-          "desc": "Run: qs -c noctalia-shell ipc call volume muteOutput"
+          "desc": "Mute volume"
         },
         {
           "keys": "Mic Mute",
-          "desc": "Run: qs -c noctalia-shell ipc call volume muteInput"
+          "desc": "Mute microphone"
         },
         {
           "keys": "Bright Up",
-          "desc": "Run: qs -c noctalia-shell ipc call brightness increase"
+          "desc": "Increase brightness"
         },
         {
           "keys": "Bright Down",
-          "desc": "Run: qs -c noctalia-shell ipc call brightness decrease"
+          "desc": "Decrease brightness"
         }
       ]
     },
@@ -194,11 +194,11 @@
           "desc": "Focus Column Left"
         },
         {
-          "keys": "Super + Shift + WheelScrollDown",
+          "keys": "Super + Alt + WheelScrollDown",
           "desc": "Focus Column Right"
         },
         {
-          "keys": "Super + Shift + WheelScrollUp",
+          "keys": "Super + Alt + WheelScrollUp",
           "desc": "Focus Column Left"
         }
       ]
@@ -341,11 +341,11 @@
           "desc": "Move Column To Workspace Up"
         },
         {
-          "keys": "Super + Ctrl + WheelScrollDown",
+          "keys": "Super + Shift + WheelScrollDown",
           "desc": "Move Column To Workspace Down"
         },
         {
-          "keys": "Super + Ctrl + WheelScrollUp",
+          "keys": "Super + Shift + WheelScrollUp",
           "desc": "Move Column To Workspace Up"
         },
         {
@@ -357,11 +357,11 @@
           "desc": "Move Column Left"
         },
         {
-          "keys": "Super + Ctrl + Shift + WheelScrollDown",
+          "keys": "Super + Ctrl + Alt + WheelScrollDown",
           "desc": "Move Column Right"
         },
         {
-          "keys": "Super + Ctrl + Shift + WheelScrollUp",
+          "keys": "Super + Ctrl + Alt + WheelScrollUp",
           "desc": "Move Column Left"
         },
         {
