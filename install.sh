@@ -169,7 +169,7 @@ function stowDotfiles() {
     return 1
   fi
 
-  local STOW_DIRS=(btop cava fastfetch fcitx5 fish gtk-3.0 gtk-4.0 kitty niri noctalia nvim qt5ct qt6ct snapper starship tealdeer tmux yazi zathura)
+  local STOW_DIRS=(btop cava eza fastfetch fcitx5 fish gtk-3.0 gtk-4.0 kitty niri noctalia nvim qt5ct qt6ct snapper starship tealdeer tmux yazi zathura)
 
   # Check and convert to .bak if there exists any config file
   cd "$DOTFILES_DIR" || return
