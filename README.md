@@ -454,12 +454,19 @@ nvim /etc/locale.conf
 # Add: LANG=en_US.UTF-8
 ```
 
-If you set the console keyboard layout, make the changes persistent in `/etc/vconsole.conf`
-by using `touch` and `nvim`:
+If you set the console keyboard layout, make the changes persistent in
+`/etc/vconsole.conf` by using `touch` and `nvim`:
 
 ```conf
-KEYMAP=en
+KEYMAP=us
 ```
+
+> [!NOTE]
+> It is possible to change it later on with:
+>
+> ```bash
+> localectl set-keymap us
+> ```
 
 ### Hostname
 
@@ -536,7 +543,7 @@ Check the output:
 ```bash
 localectl status
 # System Locale: LANG=en_US.UTF-8
-#   VC Keymap: en
+#   VC Keymap: us
 #   X11 Layout: (unset)
 ```
 
