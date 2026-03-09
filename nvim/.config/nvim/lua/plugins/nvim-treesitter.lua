@@ -31,6 +31,7 @@ return {
         "markdown",
         "markdown_inline",
         "make",
+        "nix",
       }
 
       if type(opts.highlight) == "table" and type(opts.highlight.disable) == "table" then

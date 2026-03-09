@@ -223,6 +223,11 @@ function others() {
   if [[ ! -e "$HOME/.cache/tealdeer/tldr-pages/pages.en/" ]]; then
     tldr --update
   fi
+
+  # nix's LSP dependency
+  if [[ ! -e "$HOME/.cargo/bin/statix" ]]; then
+    cargo install statix
+  fi
 }
 
 function cleanUp() {

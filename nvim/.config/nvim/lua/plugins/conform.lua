@@ -8,6 +8,7 @@ return {
       systemverilog = { "verible" },
       tex = { "latexindent" },
       -- kdl = { "kdlfmt" },
+      nix = { "nixfmt" },
     })
 
     return opts

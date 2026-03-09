@@ -20,6 +20,8 @@ return {
       "markdown-toc",
       "markdownlint-cli2",
       "marksman",
+      "nil",
+      "nixfmt",
       "prettier",
       "pyright",
       "ruff",

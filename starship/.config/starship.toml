@@ -101,6 +101,7 @@ format = '[](bold fg:green)[󰉋 $path]($style)[](bold fg:green)'
 "GitHub" = " 󰊤 "
 "Workspace" = "  "
 "arch-dotfiles" = "  "
+"nix-dotfiles" = "  "
 "dotfiles" = "  "
 "iso" = " 󰗮 "
 

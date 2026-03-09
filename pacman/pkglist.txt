@@ -54,3 +54,5 @@ texlive-langother
 libxcrypt-compat
 libnotify
 firewalld
+rust
+nix
