@@ -3,7 +3,7 @@
 input {
     keyboard {
         xkb {
-            layout "en"
+            layout "us"
             // options "grp:win_space_toggle,compose:ralt,escape:nocaps"
             options "caps:escape"
         }

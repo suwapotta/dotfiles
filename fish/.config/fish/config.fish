@@ -35,4 +35,4 @@ end
 set -gx SUDO_PROMPT (set_color -u -o red)"[sudo]"(set_color -u cyan) "Enter password %p:  "(set_color normal)
 export MANPAGER='nvim +Man!'
 export LIBVA_DRIVER_NAME=iHD
-export EZA_COLORS="*.txt=35:*.md=35:*.kdl=33:*.sv=33"
+export EZA_COLORS="*.txt=35:*.nix=33:*.kdl=33:*.sv=33"
